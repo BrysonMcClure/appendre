@@ -8,6 +8,11 @@ import './vendors/fontawesome-free-6.2.0-web/css/all.min.css';
 import HelloWorld from "./components/hello-world";
 import LandingPage from "./components/landing-page";
 import Appendre from "./components/appendre";
+import Signup from "./components/signup";
+import Profile from "./components/profile";
+//Not exactly sure why the following was neccessary and default index.js does not return, still failed with
+//a hello world component so the issue must be something strange with the file system structure, may want to try recreating and destryoing later?
+import Login from "./components/login/index";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
@@ -20,6 +25,12 @@ function App() {
                              element={<LandingPage/>}/>
                       <Route path="appendre"
                              element={<Appendre/>}/>
+                      <Route path="signup"
+                             element={<Signup/>}/>
+                      <Route path="profile"
+                             element={<Profile/>}/>
+                      <Route path="login"
+                             element={<Login/>}/>
                   </Route>
               </Routes>
           </div>

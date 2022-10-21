@@ -13,13 +13,21 @@ const LandingPage = () => {
         navigate('/appendre');
     }
 
+    function goToSignup() {
+        navigate('/signup');
+    }
+
+    function goToLogin() {
+        navigate('/login');
+    }
+
     return(
         <div>
             <h1>{displayLanguage.WELCOME_TO_APPRENDRE}</h1>
             <h2>{displayLanguage.ABOUT_APPRENDRE}</h2>
-            <button className="btn-primary rounded-pill">{displayLanguage.LOGIN}</button>
-            <button className="btn-primary rounded-pill">{displayLanguage.SIGN_UP}</button>
-            <button type="button" className="btn-primary rounded-pill" onClick={handleClick}>{displayLanguage.CONTINUE_AS_GUEST}</button>
+            <button type="button" className="btn btn-primary rounded-pill" onClick={goToLogin}>{displayLanguage.LOGIN}</button>
+            <button type="button" className="btn btn-primary rounded-pill" onClick={goToSignup}>{displayLanguage.SIGN_UP}</button>
+            <button type="button" className="btn btn-primary rounded-pill" onClick={handleClick}>{displayLanguage.CONTINUE_AS_GUEST}</button>
             {/*<div className="btn-group" role="group" aria-label="Basic radio toggle button group">*/}
             {/*    <input type="radio" className="btn-check" name="btnradio" id="btnradio1"*/}
             {/*           autoComplete="off" checked=""/>*/}
