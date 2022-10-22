@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from "react";
 import * as authService from "../../services/auth-service"
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const Profile= () => {
+    const languagePreference = useSelector((lang) => lang.about_appendre);
+    ///console.log(languagePreference);
     //totally should make this a recuder later I think.
     const [profile, setProfile] = useState({});
     const navigate = useNavigate();

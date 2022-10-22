@@ -14,7 +14,7 @@ const SignUp = () => {
 
     const signUpPressed = () => {
         //This one is fine since its not actually responsible for returning anything
-        authService.signup(newUser).then(() => navigate('/profile')).catch((e) => alert('Username already in use'));
+        authService.signup(newUser).then(() => navigate('/appendre/profile')).catch((e) => alert('Username already in use'));
         //Lookinto custom alerts later
         // <div className="alert alert-dismissible alert-danger">
         //     <button type="button" className="btn-close" data-bs-dismiss="alert"></button>
@@ -70,8 +70,8 @@ const SignUp = () => {
                 <input type="password" className="form-control" placeholder="Password"
                        id="inputPassword" onChange={(e) => setNewUser({...newUser, password: e.target.value})}/>
             </form>
-            {/*Should be disabled if username is not valid since we are doing that now. Cleaner approach over alerting that it didnt work, preventing the mistake in the first place I think would be preferable.*/}
-            <button type="button" className="btn btn-primary" onClick={signUpPressed}>SignUp</button>
+            {/*Can make this a more complex variable for checking other field characteristics. Should be disabled if username is not valid since we are doing that now. Cleaner approach over alerting that it didnt work, preventing the mistake in the first place I think would be preferable.*/}
+            <button type="button" className={`btn btn-primary ${newUser.password === '' ? 'disabled' : ''}`} onClick={signUpPressed}>SignUp</button>
         </div>
     )
 };

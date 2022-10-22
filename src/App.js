@@ -12,7 +12,8 @@ import Signup from "./components/signup";
 import Profile from "./components/profile";
 //Not exactly sure why the following was neccessary and default index.js does not return, still failed with
 //a hello world component so the issue must be something strange with the file system structure, may want to try recreating and destryoing later?
-import Login from "./components/login/index";
+//FIgured it out! Had a dead login.js file hanging out outside of the component folder which it was confusing for the file in the folder. got it.
+import Login from "./components/login";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
@@ -24,11 +25,14 @@ function App() {
                       <Route index
                              element={<LandingPage/>}/>
                       <Route path="appendre"
-                             element={<Appendre/>}/>
+                             element={<Appendre/>}>
+                          <Route index
+                                 element={<HelloWorld/>}/>
+                          <Route path="profile"
+                                 element={<Profile/>}/>
+                      </Route>
                       <Route path="signup"
                              element={<Signup/>}/>
-                      <Route path="profile"
-                             element={<Profile/>}/>
                       <Route path="login"
                              element={<Login/>}/>
                   </Route>

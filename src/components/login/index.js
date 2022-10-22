@@ -7,7 +7,7 @@ const Login = () => {
     const[loginUser, setLoginUser] = useState({username: '', password: ''});
     const navigate = useNavigate();
     const login = () => {
-        authService.login(loginUser).then((user) => navigate('/profile')).catch(e => alert("The username and password entered do not match our records. Please check what you entered and try again"));
+        authService.login(loginUser).then((user) => navigate('/appendre/profile')).catch(e => alert("The username and password entered do not match our records. Please check what you entered and try again"));
     }
     return (
         <div>
