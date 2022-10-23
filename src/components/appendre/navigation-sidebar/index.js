@@ -24,14 +24,14 @@ const NavigationSidebar = () => {
             <a href="#" className="list-group-item list-group-item-action disabled">{languagePreference.trending_replies}
                 <span className="badge bg-primary rounded-pill">14</span>
             </a>
-            <div className="btn-group list-group-item" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" className="btn-check" name="btnradio" id="btnradio1"
-                       autoComplete="off" onClick={frenchClicked}/>
-                <label className="btn btn-outline-primary" htmlFor="btnradio1">{languagePreference.french}</label>
-                <input type="radio" className="btn-check" name="btnradio" id="btnradio2"
-                           autoComplete="off" onClick={englishClicked}/>
-                <label className="btn btn-outline-primary" htmlFor="btnradio2">{languagePreference.english}</label>
-            </div>
+            {/*<div className="btn-group list-group-item" role="group" aria-label="Basic radio toggle button group">*/}
+            {/*    <input type="radio" className="btn-check" name="btnradio" id="btnradio1"*/}
+            {/*           autoComplete="off" onClick={frenchClicked}/>*/}
+            {/*    <label className="btn btn-outline-primary" htmlFor="btnradio1">{languagePreference.french}</label>*/}
+            {/*    <input type="radio" className="btn-check" name="btnradio" id="btnradio2"*/}
+            {/*               autoComplete="off" onClick={englishClicked}/>*/}
+            {/*    <label className="btn btn-outline-primary" htmlFor="btnradio2">{languagePreference.english}</label>*/}
+            {/*</div>*/}
         </div>
     )
 };

@@ -12,19 +12,17 @@ const store = createStore(languagePreferenceReducer);
 
 const Appendre = () => {
     return(
-        <Provider store={store}>
-            <div className="row mt-2">
-                <div className="col-3 col-lg-3 col-xl-3">
-                    <NavigationSidebar/>
-                </div>
-                <div className="col-7 col-lg-5 col-xl-5">
-                    <Outlet/>
-                </div>
-                <div className="d-none d-lg-block col-lg-4 col-xl-4">
-                    <h1>TBD</h1>
-                </div>
+        <div className="row mt-2">
+            <div className="col-3 col-lg-3 col-xl-3">
+                <NavigationSidebar/>
             </div>
-        </Provider>
+            <div className="col-7 col-lg-5 col-xl-5">
+                <Outlet/>
+            </div>
+            <div className="d-none d-lg-block col-lg-4 col-xl-4">
+                <h1>TBD</h1>
+            </div>
+        </div>
     );
 };
 
