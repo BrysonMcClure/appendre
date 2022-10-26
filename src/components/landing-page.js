@@ -14,7 +14,7 @@ const store = createStore(languagePreferenceReducer);
 
 const LandingPage = () => {
 
-    const languagePreference = useSelector((lang) => lang);
+    const languagePreference = useSelector((state) => state.lang);
 
     const navigate = useNavigate();
     //todoe: make this a state variable with a reducer linked to a session, make sure it trickles down to children. This will determine our

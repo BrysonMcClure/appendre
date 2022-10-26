@@ -2,15 +2,18 @@ import React from "react";
 /*{useEffect}*/
 import {Outlet} from "react-router-dom";
 import {Provider} from "react-redux";
-
+import lettersReducer from "../../reducers/letters-reducer";
 import languagePreferenceReducer from "../../reducers/language-preference-reducer";
+import profileReducer from "../../reducers/profile-reducer";
 //Had to remeber to install these pacakages via npm install. Not quite sure if --save was necessary here but did it in anycase. Dont think it can jurt anything
 //But in case it does now we have a note of what we did
-import {createStore} from "redux";
+import {combineReducers, createStore} from "redux";
 import {setLanguage} from "../../actions/language-action";
 import NavigationBanner from "./navigation-banner";
-//const reducer =
-const store = createStore(languagePreferenceReducer);
+const reducer = combineReducers({lang: languagePreferenceReducer, letters: lettersReducer, profile: profileReducer});
+//const store = createStore(languagePreferenceReducer);
+const store = createStore(reducer);
+//Need to look into what the non-deprecated version of this that we should be using should be.
 
 const Main = () => {
 

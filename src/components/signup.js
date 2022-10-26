@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import * as authService from "../services/auth-service";
+import {useSelector} from "react-redux";
 
 const SignUp = () => {
     const navigate = useNavigate();
 
+    const languagePreference = useSelector((state) => state.lang);
+
     //Local state var with getter and setter + default value
     //Setting default field values for user obj
-    const [newUser, setNewUser] = useState({username:'', password:''});
+    const [newUser, setNewUser] = useState({username:'', password:'', role: ''});
     const [usernameFormLabel, setUsernameFormLabel] = useState({text:''});
     const [usernameStyling, setUsernameStyling] = useState({text:''});
     const [usernameFormStyling, setUsernameFormStyling] = useState({text:''});
@@ -35,7 +38,7 @@ const SignUp = () => {
         //setNewUser({...newUser, username: username.target.value});
         async function checkName () {
             const response = await authService.checkUsernameAvailability(newUser);
-            console.log(response);
+            //console.log(response);
             if(response) {
                 setUsernameFormLabel({text: "Username Already Taken"});
                 setUsernameStyling({text: 'is-invalid'});
@@ -51,6 +54,10 @@ const SignUp = () => {
 
     useEffect(checkUserNameAvailability, [newUser.username]);
 
+    const tester = (value) => {
+        console.log(value.value);
+    }
+
     return(
         <div>
             {/*<div className= >*/}
@@ -59,19 +66,26 @@ const SignUp = () => {
             {/*           id="inputInvalid" onChange={(username) => checkUserNameAvailability(username)}/>*/}
             {/*    <div className="invalid-feedback">${usernameFormLabel}</div>*/}
             {/*</div>*/}
-            <h1>Sign Up</h1>
+            <h1>{languagePreference.signup}</h1>
             <form className= {`form-group ${usernameFormStyling.text}`}>
-                <label className="col-form-label mt-4" htmlFor="inputUsername">Username</label>
-                <input type="text" className={`form-control ${usernameStyling.text}`} placeholder="Username"
+                <label className="col-form-label mt-4" htmlFor="inputUsername">{languagePreference.username}</label>
+                <input type="text" className={`form-control ${usernameStyling.text}`} placeholder={languagePreference.username}
                        id="inputUsername" onChange={(username) => setNewUser({...newUser, username: username.target.value})}/>
                 <div> {usernameFormLabel.text} </div>
                 {/*Additional form control needed for non-empty fields. Although once "" "" is taken techincally its not possible. May also want to add password restrictions for more of a polished look*/}
-                <label className="col-form-label mt-4" htmlFor="inputPassword">Password</label>
-                <input type="password" className="form-control" placeholder="Password"
+                <label className="col-form-label mt-4" htmlFor="inputPassword">{languagePreference.password}</label>
+                <input type="password" className="form-control" placeholder={languagePreference.password}
                        id="inputPassword" onChange={(e) => setNewUser({...newUser, password: e.target.value})}/>
+                <div className="btn-group list-group-item mt-2 col mb-2" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" className="btn-check" name="accountType" id="ac1" autoComplete="off" value="PEN" onChange= {(event) => setNewUser({...newUser, role: event.target.value})} required/>
+                    <label className="btn btn-outline-primary" htmlFor="ac1">Pen</label>
+                    <input type="radio" className="btn-check" name="accountType" id="ac2" autoComplete="off" value="PAL" onChange={(event) => setNewUser({...newUser, role: event.target.value})} required/>
+                    <label className="btn btn-outline-primary" htmlFor="ac2">Pal</label>
+                </div>
+                {/*Can make this a more complex variable for checking other field characteristics. Should be disabled if username is not valid since we are doing that now. Need to look into required prop more and why its not working here, this form of button enabled/disabled based on a staet variable is a little verbose Cleaner approach over alerting that it didnt work, preventing the mistake in the first place I think would be preferable.*/}
+                <button type="button" className={`btn btn-primary ${(newUser.password === '' || newUser.role === '') ? 'disabled' : ''}`} onClick={signUpPressed}>{languagePreference.signup}</button>
             </form>
-            {/*Can make this a more complex variable for checking other field characteristics. Should be disabled if username is not valid since we are doing that now. Cleaner approach over alerting that it didnt work, preventing the mistake in the first place I think would be preferable.*/}
-            <button type="button" className={`btn btn-primary ${newUser.password === '' ? 'disabled' : ''}`} onClick={signUpPressed}>SignUp</button>
+
         </div>
     )
 };
