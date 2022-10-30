@@ -12,11 +12,15 @@ import Signup from "./components/signup";
 import Profile from "./components/profile";
 import Main from "./components/main"
 import WriteLetter from "./components/write-letter";
+import SingleLetter from "./components/single-letter";
 //Not exactly sure why the following was neccessary and default index.js does not return, still failed with
 //a hello world component so the issue must be something strange with the file system structure, may want to try recreating and destryoing later?
 //FIgured it out! Had a dead login.js file hanging out outside of the component folder which it was confusing for the file in the folder. got it.
 import Login from "./components/login";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+
+//add a no match route later with * so we have somewhere to go if the user asks for nonsense?
+//use this for undefined permison blocked pages? I dont think so/ know if it works like that.
 
 function App() {
   return (
@@ -39,6 +43,8 @@ function App() {
                                  element={<Profile/>}/>
                           <Route path="write-letter"
                                  element={<WriteLetter/>}/>
+                          <Route path="letterDetails/:letterId"
+                                 element={<SingleLetter/>}/>
                           </Route>
                   </Route>
               </Routes>

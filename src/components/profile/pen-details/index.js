@@ -2,7 +2,7 @@ import React from "react";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import CollaboratorList from "./collaborator-list";
-import LetterList from "./letter-list";
+import MyLetterList from "./my-letter-list";
 
 const PenDetails = () =>  {
 
@@ -23,7 +23,7 @@ const PenDetails = () =>  {
     return(
         <div>
             <CollaboratorList/>
-            <LetterList/>
+            <MyLetterList/>
             <button type="button" className="btn btn-primary" onClick={writeALetter}>{languagePreference.writeALetter}</button>
             <h1>Hello World sup!</h1>
         </div>

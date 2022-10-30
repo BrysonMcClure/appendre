@@ -30,9 +30,10 @@ export const login = async (user) => {
     return response.data;
 
 }
-export const logout = async (user) => {
+export const logout = async () => {
     //api.post(`${SECURITY_API}/logout`, user).then(response => response.data);
-    const response = await api.post(`${SECURITY_API}/logout`, user);
+    //just dont send the body data, don't think we actually need it anyway hmmm?
+    const response = await api.post(`${SECURITY_API}/logout`);
     return response.data;
 }
 export const profile = async () => {

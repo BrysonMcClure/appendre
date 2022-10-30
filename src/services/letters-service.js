@@ -22,8 +22,13 @@ export const findLettersByAttribute = async (attribute, value) => {
     //Ok, so responses just have a data property, sometimes that data is a json, sometimes its a response, but that's not for us to say here I guess.
 }
 
-export const createLetter = async (letter) => {
-    const response = await api.post(LETTERS_API, letter);
+export const findLetterById = async (lid) => {
+    const response = await api.get(`${LETTERS_API}/${lid}`);
+    return response.data;
+}
+
+export const createLetter = async (letter, author) => {
+    const response = await api.post(`${LETTERS_API}/${author._id}`, letter);
     //letter as second argument means it goes in the body
     return response.data;
 }

@@ -3,6 +3,7 @@ import * as lettersService from "../services/letters-service"
 export const FIND_ALL_LETTERS = 'FIND_LETTERS';
 //This is what will utlimatley handle rending a specific user's letters
 export const FIND_LETTERS_BY_ATTRIBUTE = 'FIND_LETTERS_BY_ATTRIBUTE';
+export const FIND_LETTER_BY_ID = 'FIND_LETTER_BY_ID';
 export const CREATE_LETTER = 'CREATE_LETTER';
 export const DELETE_LETTER = 'DELETE_LETTER';
 export const UPDATE_LETTER = 'UPDATE_LETTER';
@@ -23,8 +24,17 @@ export const findLettersByAttribute = async (dispatch, attribute, value) => {
     });
 }
 
-export const createLetter = async (dispatch, letter) => {
-    const newLetter = await lettersService.createLetter(letter);
+export const findLetterById = async (dispatch, lid) => {
+    console.log("this is firing");
+    const letter = await lettersService.findLetterById(lid);
+    dispatch({
+        type: FIND_LETTER_BY_ID,
+        letter
+    });
+}
+
+export const createLetter = async (dispatch, letter, author) => {
+    const newLetter = await lettersService.createLetter(letter, author);
     dispatch({
         type: CREATE_LETTER,
         newLetter

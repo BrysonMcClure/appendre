@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 /*{useEffect}*/
 import {Outlet} from "react-router-dom";
 import {Provider} from "react-redux";
@@ -14,6 +14,7 @@ const reducer = combineReducers({lang: languagePreferenceReducer, letters: lette
 //const store = createStore(languagePreferenceReducer);
 const store = createStore(reducer);
 //Need to look into what the non-deprecated version of this that we should be using should be.
+//import {useNavigate} from "react-router-dom";
 
 const Main = () => {
 

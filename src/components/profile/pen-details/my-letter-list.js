@@ -1,7 +1,7 @@
 import React from "react";
 import {useSelector} from "react-redux";
 
-const LetterList = () => {
+const MyLetterList = () => {
 
     const languagePreference = useSelector((state) => state.lang);
 
@@ -13,4 +13,4 @@ const LetterList = () => {
     )
 };
 
-export default LetterList;
+export default MyLetterList;

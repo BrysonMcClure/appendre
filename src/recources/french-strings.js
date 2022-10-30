@@ -15,7 +15,16 @@ const frenchStrings = {
     collaborators: 'Collaborateurs',
     myLetters: 'Mes Documents',
     writeALetter: "Ecrit une Lettre",
-    whatDoYouWantToSay: 'Ce Que Vous-Voulez Dire'
+    whatDoYouWantToSay: 'Ce Que Vous-Voulez Dire',
+    title: 'Titre',
+    add: 'Ajouter',
+    letter: 'Lettre',
+    tags: 'Étiquettes',
+    by: 'Par',
+    likes: 'J\'aime',
+    dislikes: 'Détester',
+    postedOn: 'Publié á',
+    post: 'Poster'
 };
 
 export default frenchStrings;

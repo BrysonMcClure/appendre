@@ -15,7 +15,16 @@ const englishStrings = {
     collaborators: 'Collaborators',
     myLetters: 'My Letters',
     writeALetter: 'Write a Letter',
-    whatDoYouWantToSay: 'What do you want to say'
+    whatDoYouWantToSay: 'What do you want to say',
+    title: 'Title',
+    add: 'Add',
+    letter: 'letter',
+    tags: 'Tags',
+    by: 'By',
+    likes: 'Likes',
+    dislikes: 'Dislikes',
+    postedOn: 'Posted On',
+    post: 'Poster'
 };
 
 export default englishStrings;
