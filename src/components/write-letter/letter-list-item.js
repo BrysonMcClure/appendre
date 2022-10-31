@@ -13,6 +13,12 @@ const LetterListItem = ({letter, charCap}) => {
         navigate(`/appendre/letterDetails/${letter._id}`);
     }
 
+    const goToUsersPublicProfile = () => {
+        if(letter.author) {
+            navigate(`/appendre/profile/${letter.author._id}`);
+        }
+    }
+
     return(
         // <div>
         //     <h1>This is a letter</h1>
@@ -24,11 +30,11 @@ const LetterListItem = ({letter, charCap}) => {
         //calls the function everytime there is an event on the page it appears (typing in a text field kept triggering it).
         //Guess its the difference of it being a "triggered funciton" vs like just a declaration that gets declared on everylaod I think.
         //Figured this out by looking at other item button declarations. Freaking crazy man. Freaking crazy man.
-        <div className="card mb-3" onClick={() => goToDetailedLetterView()}>
-            <h3 className="card-header">{languagePreference.letter}</h3>
+        <div className="card mb-3">
+            <h3 className="card-header" onClick={() => goToDetailedLetterView()}>{languagePreference.letter}</h3>
             <div className="card-body">
                 <h5 className="card-title">{letter && letter.title}</h5>
-                <h6 className="card-subtitle text-muted">{languagePreference.by}: {letter.author && letter.author.username}</h6>
+                <h5 className="card-subtitle text-muted" onClick={()=> goToUsersPublicProfile()}>{languagePreference.by}: {letter.author && letter.author.username}</h5>
                 {/*If cap is undefined, substring just gives us the whole string, which is exactly the behavior we want, default to full text.*/}
                 <p className="card-text">{letter.text && letter.text.substring(0,charCap)}...</p>
             </div>

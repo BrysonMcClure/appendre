@@ -21,13 +21,12 @@ const Pagination = ({linkStub, listSize, elementsPerPage, currentStartIndex}) =>
     }
 
     const pageLinks = () => {
-        console.log(numberOfPages);
+        //console.log(numberOfPages);
         //return(<h1>hiii</h1>);
         let toReturn = [];
         for (let i = 0; i < numberOfPages; i ++) {
-            console.log("screw you");
             toReturn.push(
-                <li className="page-item">
+                <li className="page-item" key={i + 1}>
                     <a className={`page-link ${currentPage === (i) ? "active" : ""}`} href={`${linkStub}/${startIndex(i)}/${endIndex(i)}`}>{i + 1}</a>
                 </li>
             );
@@ -36,12 +35,12 @@ const Pagination = ({linkStub, listSize, elementsPerPage, currentStartIndex}) =>
         return toReturn;
     }
 
-    let stuff = pageLinks();
+    let formatedPageLinks = pageLinks();
 
     //Apears to not be strictly necessary in this case, but I have been burned by this before and It does not appear to be hurting anything so I am going to keep it in here for now.
     useEffect(() => {
         async function hello () {
-            stuff = await pageLinks();
+            formatedPageLinks = await pageLinks();
         }
         return hello;
         }, []);
@@ -50,7 +49,7 @@ const Pagination = ({linkStub, listSize, elementsPerPage, currentStartIndex}) =>
     //I think that stuff makes a little more sense now in the context of what we are doing/ have learned now.
     return(
         <ul className="pagination pagination-lg">
-            <li className={`page-item ${currentPage === 0 ? "disabled" : ""}`}>
+            <li className={`page-item ${currentPage === 0 ? "disabled" : ""}`} key="left">
                 <a className="page-link" href={`${linkStub}/${startIndex(currentPage-1)}/${endIndex(currentPage-1)}`}>&laquo;</a>
             </li>
             {
@@ -60,9 +59,10 @@ const Pagination = ({linkStub, listSize, elementsPerPage, currentStartIndex}) =>
                 //             <a className= "page-link" href={pageLink}>lala</a>
                 //         </li>);
                 // })
-                stuff
+                formatedPageLinks
             }
-            <li className={`page-item ${currentPage === numberOfPages - 1 ? "disabled" : ""}`}>
+            {/*Key Break if two paginations present at once maybe??? Me no Know atm. Will that happen even, not likely maybe but idk yet, I guess technically thats possible at some point in the future, but not there yet. anyway/ whooselbees.*/}
+            <li className={`page-item ${currentPage === numberOfPages - 1 ? "disabled" : ""}`} key="right">
                 <a className="page-link" href={`${linkStub}/${startIndex(currentPage+1)}/${endIndex(currentPage+1)}`}>&raquo;</a>
             </li>
         </ul>

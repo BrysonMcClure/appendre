@@ -49,3 +49,8 @@ export const checkUsernameAvailability = async (user) => {
     return response.data;
 }
 
+export const getUserById = async (uid) => {
+    const response = await api.get(`${SECURITY_API}/${uid}`);
+    return response.data;
+}
+

@@ -6,16 +6,17 @@ import {useDispatch, useSelector} from "react-redux";
 import PenDetails from "./pen-details";
 import {getLanguage} from "../../actions/language-action";
 import {getProfile} from "../../actions/auth-action";
+import {Outlet} from "react-router-dom";
 
 const Profile= () => {
     const languagePreference = useSelector((state) => state.lang);
     ///console.log(languagePreference);
     //totally should make this a recuder later I think.
     //const [profile, setProfile] = useState({});
-    const profile = useSelector((state) => state.profile);
-    const navigate = useNavigate();
-
-    const dispatch = useDispatch();
+    // const profile = useSelector((state) => state.profile);
+    // const navigate = useNavigate();
+    //
+    // const dispatch = useDispatch();
 
     //Once on load, make sure we are logged in, if not this page was accessed inadvertley and we should just bounce user
     //back to landing page. Not sure if this is the best/ most graceful way to do this, but at least for now this is the most elegant
@@ -35,13 +36,13 @@ const Profile= () => {
     //
     // }, [] )
 
-    useEffect(() => {
-        //load profile screen, need to load profile once on reeender. Helps avoid refresh issue with
-        //first login not loading profile immeidatleey
-        //What was that other routing thing I think i wanted to fix first before working moree on documents
-        //rending? idk
-        getProfile(dispatch);
-    }, []);
+    // useEffect(() => {
+    //     //load profile screen, need to load profile once on reeender. Helps avoid refresh issue with
+    //     //first login not loading profile immeidatleey
+    //     //What was that other routing thing I think i wanted to fix first before working moree on documents
+    //     //rending? idk
+    //     getProfile(dispatch);
+    // }, []);
 
     // const setUpProfile = () => {
     //     async function establishProfile() {
@@ -52,21 +53,21 @@ const Profile= () => {
     //     establishProfile();
     // }
 
-    const logoutUser = async () => {
-        //Changing this to use the action instead, now that profile is a reducer and not a local state var,
-        //Just to make it explicit that we are clearing the session, instead of just redirecting and counting
-        //On next login to repole session. Essentially action is just helping us to maintain parody explicitly
-        //Of reducer and server status rather than counting on next load to overrite with new session data me thinks.
-        const response = await authAction.logout(dispatch);
-        //Nice, fixed void return type and this works now. Check mark.
-        if (response === "OK") {
-            navigate('/');
-        }
-        else {
-            alert("Logout Failed, Please Try again");
-        }
-        console.log(response);
-    }
+    // const logoutUser = async () => {
+    //     //Changing this to use the action instead, now that profile is a reducer and not a local state var,
+    //     //Just to make it explicit that we are clearing the session, instead of just redirecting and counting
+    //     //On next login to repole session. Essentially action is just helping us to maintain parody explicitly
+    //     //Of reducer and server status rather than counting on next load to overrite with new session data me thinks.
+    //     const response = await authAction.logout(dispatch);
+    //     //Nice, fixed void return type and this works now. Check mark.
+    //     if (response === "OK") {
+    //         navigate('/');
+    //     }
+    //     else {
+    //         alert("Logout Failed, Please Try again");
+    //     }
+    //     console.log(response);
+    // }
 
     //Once on load, loading the users profile into memory for our reducer to use and render later
     // useEffect(() => {
@@ -84,11 +85,8 @@ const Profile= () => {
 
     return (
         <div>
-            <h4>{profile.username}</h4>
-            <h4>Role: {profile.role}</h4>
-            {profile.role === 'PEN' && <PenDetails/>}
             {/*console.log(profile)*/}
-            <button className="btn btn-secondary" type="button" onClick={logoutUser}>{languagePreference.logout}</button>
+            <Outlet/>
         </div>
     )
 };
