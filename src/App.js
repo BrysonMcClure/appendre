@@ -41,7 +41,7 @@ function App() {
                                  element={<HelloWorld/>}/>
                           <Route path="profile"
                                  element={<Profile/>}/>
-                          <Route path="write-letter"
+                          <Route path="write-letter/:start/:end"
                                  element={<WriteLetter/>}/>
                           <Route path="letterDetails/:letterId"
                                  element={<SingleLetter/>}/>

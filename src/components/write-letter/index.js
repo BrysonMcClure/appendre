@@ -5,6 +5,12 @@ import {findAllLetters, createLetter} from "../../actions/letters-action";
 import LettersList from "./letters-list";
 import {calculateNewValue} from "@testing-library/user-event/dist/utils";
 import TagList from "./tag-list";
+import {useParams} from "react-router-dom";
+import Pagination from "../pagination";
+
+const CHAR_CAP = 300;
+export const PAGE_SIZE = 7;
+const PAGINATIONSTUB = "/appendre/write-letter";
 
 const WriteLetter = () => {
 
@@ -13,7 +19,9 @@ const WriteLetter = () => {
     const profile = useSelector((state) => state.profile);
 
     //How many charcters card preview of letter displays before user must follow document subview to be able to access full text
-    const CHAR_CAP = 300;
+
+
+    const params = useParams();
 
     const dispatch = useDispatch();
 
@@ -156,7 +164,14 @@ const WriteLetter = () => {
 
 
             {/*/DONE!Should be a component later, makes it more reusable later probably too*/}
-            {letters.length > 1 && <LettersList lettersList = {letters.slice(0,100)} charCap = {CHAR_CAP}/>}
+            {letters.length > 1 && <LettersList
+                lettersList = {letters.slice(params.start,params.end)} charCap = {CHAR_CAP}/>}
+            {/*No pagination link provided, assumed no pagination wanted to be rendered
+            Moving Pagination here to the bottom of the navigating page as opposed to tacking onto the end of the letters-list. Techinically I think both approaches are valid, me attaching it, or having it as an optional feature/
+            attribute of the rednered navigable content, so technically I reserve the right to do both, but just going to try it here for now, theoretically it is now ever so slightly more reusable/ less middle man steps to pass stuff around
+            and less repeated/ double up calculation maybe? IDK man I don't know.*/}
+            {letters.length > 1 && <Pagination linkStub={PAGINATIONSTUB}
+                                               listSize={letters.length} elementsPerPage={PAGE_SIZE} currentStartIndex={params.start}/>}
         </div>}</div>
 
     )

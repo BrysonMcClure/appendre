@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import {useSelector} from "react-redux";
 import LetterListItem from "./letter-list-item";
+import Pagination from "../pagination";
 
 //Does not like dashes apperntly
-const LettersList = ({lettersList, charCap}) => {
+const LettersList = ({lettersList, charCap, paginationLinkStub, paginationPageSize, paginationCurrentStartIndex}) => {
 
     const languagePreference = useSelector((state) => state.lang);
     //const letters = useSelector((state) => state.letters);
