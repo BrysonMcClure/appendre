@@ -129,7 +129,11 @@ const WriteLetter = () => {
     //to me like that would actually be a really good approach to this. Wanna just try it now?
     //That worked! Yayayayayay! Yea, I quite like that, And i think in this case this high level control makes a lot of sense for what
     //We are are trying to achieve here. nice!
-    return(<div>{profile.username &&
+    //Wouldnt even get the button to get here if you were a pal user, but still may want to do that/ this check here maybe again to help prevent
+    //Around/ against page/link servers.
+    //Like french and english, PEN should probably be a const huh? in case we dedide to expand upon/ change this later maybe, might be a good idea/ practice
+    //Just another thing to look at maybe when we are coming through and doing our little clean up here at the end.
+    return(<div>{profile.role === "PEN" &&
         <div>
             <h1>{languagePreference.writeALetter}</h1>
             <h1>Need to work on automatic rerouting if state gets undefined.</h1>
@@ -164,7 +168,7 @@ const WriteLetter = () => {
 
 
             {/*/DONE!Should be a component later, makes it more reusable later probably too*/}
-            {letters.length > 1 && <LettersList
+            {letters.length >= 1 && <LettersList
                 lettersList = {letters.slice(params.start,params.end)} charCap = {CHAR_CAP}/>}
             {/*No pagination link provided, assumed no pagination wanted to be rendered
             Moving Pagination here to the bottom of the navigating page as opposed to tacking onto the end of the letters-list. Techinically I think both approaches are valid, me attaching it, or having it as an optional feature/

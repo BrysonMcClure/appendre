@@ -2,10 +2,19 @@ import React from "react";
 import {useSelector} from "react-redux";
 import TagList from "./tag-list";
 import {useNavigate} from "react-router-dom";
+import Replies from "../replies";
 
-const LetterListItem = ({letter, charCap}) => {
+//withReplies, determines if the letter list item displays the letter's replies or not, false by default.
+//Allows us to use the same method to then render a detailed letter view using the same method later on, might just change it to a detailed mode flag in general if
+//we decided to add other details on single letter view vs list view mode to help make summary and search results pages a little more streamlined maybe. IDK.
+const LetterListItem = ({letter, charCap, withReplies = false}) => {
 
     const languagePreference = useSelector((state) => state.lang);
+
+    //Using as a logged in checker to only display reply button if a palUser
+    const profile = useSelector((state) => state.profile);
+
+    const palUserLoggedIn = profile.role === "PAL";
 
     const navigate = useNavigate();
 
@@ -35,7 +44,7 @@ const LetterListItem = ({letter, charCap}) => {
             <div className="card-body">
                 <h5 className="card-title">{letter && letter.title}</h5>
                 <h5 className="card-subtitle text-muted" onClick={()=> goToUsersPublicProfile()}>{languagePreference.by}: {letter.author && letter.author.username}</h5>
-                {/*If cap is undefined, substring just gives us the whole string, which is exactly the behavior we want, default to full text.*/}
+                {/*If cap is undefined, substring just gives us the whole string, which is exactly the behavior we want, default to full text. Doesnt break without a default value, so fine with out one I do believe*/}
                 <p className="card-text">{letter.text && letter.text.substring(0,charCap)}...</p>
             </div>
             {/*Breaking up the divs allows the image to interject itself as a break between card rows, not sure I like this style prefer an inline profile pic style instead me thinks.*/}
@@ -62,6 +71,8 @@ const LetterListItem = ({letter, charCap}) => {
             <div className="card-footer text-muted">
                 {languagePreference.postedOn}: {letter.date && letter.date.substring(0,10)}
             </div>
+            {/*We are always assuming letter is only one long/ one letter, which it always should be, but should we maybe check this somewhere? IDK*/}
+            {withReplies && <Replies replies={letter.replies} parentLetter={letter} withEditor={palUserLoggedIn}/>}
         </div>
     )
 };

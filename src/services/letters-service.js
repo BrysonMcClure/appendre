@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = 'http://localhost:4000/api'
+export const API_BASE = 'http://localhost:4000/api'
 const LETTERS_API = `${API_BASE}/letters`
 
 const api = axios.create({
@@ -9,6 +9,7 @@ const api = axios.create({
 
 export const findAllLetters = async () => {
     const response = await api.get(LETTERS_API);
+    //console.log(response.data);
     return response.data;
 }
 

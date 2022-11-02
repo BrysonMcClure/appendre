@@ -15,6 +15,7 @@ import WriteLetter from "./components/write-letter";
 import SingleLetter from "./components/single-letter";
 import PrivateProfile from "./components/profile/private-profile";
 import PublicProfile from "./components/profile/public-profile";
+import Letters from "./components/appendre/letters";
 //Not exactly sure why the following was neccessary and default index.js does not return, still failed with
 //a hello world component so the issue must be something strange with the file system structure, may want to try recreating and destryoing later?
 //FIgured it out! Had a dead login.js file hanging out outside of the component folder which it was confusing for the file in the folder. got it.
@@ -51,6 +52,8 @@ function App() {
                           </Route>
                           <Route path="write-letter/:start/:end"
                                  element={<WriteLetter/>}/>
+                          <Route path="letters/:start/:end"
+                                 element={<Letters/>}/>
                           <Route path="letterDetails/:letterId"
                                  element={<SingleLetter/>}/>
                           </Route>

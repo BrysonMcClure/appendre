@@ -13,7 +13,7 @@ const TagList = ({tagList}) => {
     return (
         <div className="row-cols-auto">
             {tagList.map((tag) => {
-                return (<span className="badge rounded-pill bg-primary" key={tag + Date.now()}>{tag}</span>);
+                return (<span className="badge rounded-pill bg-primary" key={tag + Date.now()}>#{tag}</span>);
             })}
         </div>
     );

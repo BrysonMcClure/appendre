@@ -39,7 +39,7 @@ const SingleLetter = () => {
     return(
         <div>
             {console.log(letters)}
-            {letters && <LetterListItem letter={letters}/>}
+            {letters.length === 1 && <LetterListItem letter={letters[0]} withReplies= {true}/>}
         </div>
     );
 }

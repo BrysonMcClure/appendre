@@ -24,7 +24,9 @@ const englishStrings = {
     likes: 'Likes',
     dislikes: 'Dislikes',
     postedOn: 'Posted On',
-    post: 'Poster'
+    post: 'Post',
+    replies: 'Replies',
+    reply: 'Reply'
 };
 
 export default englishStrings;

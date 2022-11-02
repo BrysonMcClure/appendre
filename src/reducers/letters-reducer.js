@@ -8,13 +8,13 @@ const lettersReducer = (state = [], action) => {
             return action.letters;
         case FIND_LETTER_BY_ID:
             console.log(action.letter, "hi");
-            return action.letter;
+            return [action.letter];
         case CREATE_LETTER:
             return [...state, action.newLetter];
         case DELETE_LETTER:
-            return state.filter(letter => letter._id !== action.letter._id);
+            return state.filter((letter) => letter._id !== action.letter._id);
         case UPDATE_LETTER:
-            return state.map(letter => letter._id === action.letter._id ? action.letter : letter);
+            return state.map(letter => letter._id === action.updatedLetter._id ? action.updatedLetter : letter);
         default:
             return state;
     }

@@ -24,7 +24,9 @@ const frenchStrings = {
     likes: 'J\'aime',
     dislikes: 'Détester',
     postedOn: 'Publié á',
-    post: 'Poster'
+    post: 'Poster',
+    replies: 'Reponses',
+    reply: 'Repondre'
 };
 
 export default frenchStrings;
