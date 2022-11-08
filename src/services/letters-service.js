@@ -14,7 +14,8 @@ export const findAllLetters = async () => {
 }
 
 export const findLettersByAttribute = async (attribute, value) => {
-    const response = await api.get(`${LETTERS_API}/attribute/value`);
+    //Would need to update with & ... actually never mind since we would actually just be cominingthe results of multiple individual property calls. yeah,
+    const response = await api.get(`${LETTERS_API}/attributeSearch?${attribute}=${value}`);
     //still unsure of the best way to be structuiring this type of attribute value request, maybe we should just bite the
     //bullet and define a dao case that we swtich on for each attribute we could be looking by
     //then multisearches could call multiple and then just and the results?

@@ -16,7 +16,21 @@ export const findAllLetters = async (dispatch) => {
     });
 }
 
-export const findLettersByAttribute = async (dispatch, attribute, value) => {
+export const findLettersByAttribute = async (dispatch, queryParams) => {
+    //This is called array destructuring apparently. Interesting.
+    const [attribute, value] = queryParams[0];
+    //For now, just going to grab the first one, but I am hoping/ thinking this would be pretty easy
+    //To make into a multidefined search by mapping over the inputed query params array, and then
+    //calling the service on each pair one at a tiem, and then performing an intersection on all the results
+    //And returning that. We arent chaning the database just reading from it so i think manipulation of results
+    //Like that would be fine to have on this side of the application I think. LIke right? Ok, just
+    //Thinking about this now and think this would maybe be a good idea to work on later if we want to expand
+    //the functionaility, would also require a change to the ui to support such a thing.
+    // const attribute = (queryParams[0])[0];
+    // const value = (queryParams[0])[1];
+    console.log(attribute, "Im a strawberry");
+    console.log(value, "It's ongion time");
+    //Expects a returned array of letters matching the attribute value pairs.
     const letters = await lettersService.findLettersByAttribute(attribute,value);
     dispatch({
         type: FIND_LETTERS_BY_ATTRIBUTE,

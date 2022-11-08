@@ -7,7 +7,7 @@ const frenchStrings = {
     password: 'Mot de Passe',
     signup: 'Enregistrer',
     continue_as_guest: 'Continue sans se Connecter',
-    profile: 'Profile',
+    profile: 'Profil',
     trending_letters: 'Lettres Populaire',
     trending_replies: 'Reponse Populaire',
     french: 'Français',
@@ -26,7 +26,19 @@ const frenchStrings = {
     postedOn: 'Publié á',
     post: 'Poster',
     replies: 'Reponses',
-    reply: 'Repondre'
+    reply: 'Repondre',
+    search: 'Rechercher',
+    text: 'Texte',
+    tag: 'Étiquette',
+    author: 'Écrivain',
+    date: 'Date',
+    role: 'Rôle',
+    user: 'Utilisateur',
+    searchAppendre: 'Chercher Appendre',
+    resultsFor: 'Resultats pour',
+    with: 'avec',
+    matching: 'correspondant à',
+    viewProfile: 'Voir Profile'
 };
 
 export default frenchStrings;

@@ -18,7 +18,7 @@ const englishStrings = {
     whatDoYouWantToSay: 'What do you want to say',
     title: 'Title',
     add: 'Add',
-    letter: 'letter',
+    letter: 'Letter',
     tags: 'Tags',
     by: 'By',
     likes: 'Likes',
@@ -26,7 +26,19 @@ const englishStrings = {
     postedOn: 'Posted On',
     post: 'Post',
     replies: 'Replies',
-    reply: 'Reply'
+    reply: 'Reply',
+    search: 'Search',
+    text: 'Text',
+    tag: 'Tag',
+    author: 'Author',
+    date: 'Date',
+    role: 'Role',
+    user: 'User',
+    searchAppendre: 'Search Appendre',
+    resultsFor: 'Results for',
+    with: 'with',
+    matching: 'matching',
+    viewProfile: 'View Profile'
 };
 
 export default englishStrings;

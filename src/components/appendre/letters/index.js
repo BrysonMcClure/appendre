@@ -7,7 +7,7 @@ import Pagination from "../../pagination";
 import {PAGE_SIZE} from "../../write-letter";
 
 const PAGINATION_STUB = "/appendre/letters";
-const CHAR_CAP = "300";
+export const CHAR_CAP = "300";
 
 const Letters = () => {
 
@@ -31,7 +31,7 @@ const Letters = () => {
             <h1>{languagePreference.trending_letters}</h1>
             {letters.length >= 1 && <LettersList
                 lettersList = {letters.slice(params.start,params.end)} charCap = {CHAR_CAP}/>}
-            {letters.length > 1 && <Pagination linkStub={PAGINATION_STUB}
+            {letters.length >= 1 && <Pagination linkStub={PAGINATION_STUB}
                                                listSize={letters.length} elementsPerPage={PAGE_SIZE} currentStartIndex={params.start}/>}
         </div>
     );

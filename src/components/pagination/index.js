@@ -6,7 +6,7 @@ ListSize(int): The total size of the list this pagination is managing
 ElementsPerPage(int): How many items should appear on page, determines how many pages pagination returns
 CurrentStartIndex (int): The lower bound in the range of elements being displayed currently, used in conjunction with provided buffer size to determine currently occupied page
  */
-const Pagination = ({linkStub, listSize, elementsPerPage, currentStartIndex}) => {
+const Pagination = ({linkStub, searchParams, listSize, elementsPerPage, currentStartIndex}) => {
 
     const currentPage = currentStartIndex / elementsPerPage;
 
@@ -27,7 +27,7 @@ const Pagination = ({linkStub, listSize, elementsPerPage, currentStartIndex}) =>
         for (let i = 0; i < numberOfPages; i ++) {
             toReturn.push(
                 <li className="page-item" key={i + 1}>
-                    <a className={`page-link ${currentPage === (i) ? "active" : ""}`} href={`${linkStub}/${startIndex(i)}/${endIndex(i)}`}>{i + 1}</a>
+                    <a className={`page-link ${currentPage === (i) ? "active" : ""}`} href={`${linkStub}/${startIndex(i)}/${endIndex(i)}${searchParams && '?' + searchParams}`}>{i + 1}</a>
                 </li>
             );
             //toReturn.push(`${linkStub}/${startIndex(i)}/${endIndex(i)}`);
@@ -50,7 +50,7 @@ const Pagination = ({linkStub, listSize, elementsPerPage, currentStartIndex}) =>
     return(
         <ul className="pagination pagination-lg">
             <li className={`page-item ${currentPage === 0 ? "disabled" : ""}`} key="left">
-                <a className="page-link" href={`${linkStub}/${startIndex(currentPage-1)}/${endIndex(currentPage-1)}`}>&laquo;</a>
+                <a className="page-link" href={`${linkStub}/${startIndex(currentPage-1)}/${endIndex(currentPage-1)}${searchParams && '?' + searchParams}`}>&laquo;</a>
             </li>
             {
                 // stuff && stuff.map((pageLink) => {
@@ -63,7 +63,7 @@ const Pagination = ({linkStub, listSize, elementsPerPage, currentStartIndex}) =>
             }
             {/*Key Break if two paginations present at once maybe??? Me no Know atm. Will that happen even, not likely maybe but idk yet, I guess technically thats possible at some point in the future, but not there yet. anyway/ whooselbees.*/}
             <li className={`page-item ${currentPage === numberOfPages - 1 ? "disabled" : ""}`} key="right">
-                <a className="page-link" href={`${linkStub}/${startIndex(currentPage+1)}/${endIndex(currentPage+1)}`}>&raquo;</a>
+                <a className="page-link" href={`${linkStub}/${startIndex(currentPage+1)}/${endIndex(currentPage+1)}${searchParams && '?' + searchParams}`}>&raquo;</a>
             </li>
         </ul>
     );

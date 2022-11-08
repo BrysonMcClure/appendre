@@ -54,3 +54,10 @@ export const getUserById = async (uid) => {
     return response.data;
 }
 
+//Returns a list of users according to an attribute. To be used for search and not signin puruposes. Maybe want to make this a reducer and seperate service later. Not sure. Working on search for now.
+export const findUsersByAttribute = async (attribute, value) => {
+    const response = await api.get(`${SECURITY_API}?${attribute}=${value}`);
+    return response.data;
+
+}
+

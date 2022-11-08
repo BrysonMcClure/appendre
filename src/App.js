@@ -1,6 +1,7 @@
 //import logo from './logo.svg';
 import './App.css';
 //Main Bootstrap
+//import './vendors/bootstrap/bootstrap-5.1.3-dist/js/bootstrap.min.js'
 import './vendors/bootstrap/bootstrap-5.1.3-dist/css/bootstrap.min.css';
 //Our Bootswatch override theme library
 import './vendors/bootstrap/bootstrap.min.css';
@@ -16,6 +17,9 @@ import SingleLetter from "./components/single-letter";
 import PrivateProfile from "./components/profile/private-profile";
 import PublicProfile from "./components/profile/public-profile";
 import Letters from "./components/appendre/letters";
+import Search from "./components/appendre/search";
+import LettersSearchResults from "./components/appendre/search/letters-search-results";
+import UsersSearchResults from "./components/appendre/search/users-search-results";
 //Not exactly sure why the following was neccessary and default index.js does not return, still failed with
 //a hello world component so the issue must be something strange with the file system structure, may want to try recreating and destryoing later?
 //FIgured it out! Had a dead login.js file hanging out outside of the component folder which it was confusing for the file in the folder. got it.
@@ -56,6 +60,13 @@ function App() {
                                  element={<Letters/>}/>
                           <Route path="letterDetails/:letterId"
                                  element={<SingleLetter/>}/>
+                          <Route path="search"
+                                 element={<Search/>}>
+                              <Route path="letters-search/:start/:end"
+                                     element={<LettersSearchResults/>}/>
+                              <Route path="users-search/:start/:end"
+                                     element={<UsersSearchResults/>}/>
+                          </Route>
                           </Route>
                   </Route>
               </Routes>
