@@ -2,6 +2,9 @@ import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import * as authService from "../services/auth-service";
 import {useSelector} from "react-redux";
+import FileBase64 from 'react-file-base64';
+
+//Inspiration to use FileBase64 for images very loosely adapted from: https://medium.com/geekculture/upload-image-file-in-react-to-mongodb-362b02abfc71
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -10,7 +13,7 @@ const SignUp = () => {
 
     //Local state var with getter and setter + default value
     //Setting default field values for user obj
-    const [newUser, setNewUser] = useState({username:'', password:'', role: ''});
+    const [newUser, setNewUser] = useState({username:'', password:'', role: '', profilePic: ''});
     const [usernameFormLabel, setUsernameFormLabel] = useState({text:''});
     const [usernameStyling, setUsernameStyling] = useState({text:''});
     const [usernameFormStyling, setUsernameFormStyling] = useState({text:''});
@@ -76,6 +79,10 @@ const SignUp = () => {
                 <label className="col-form-label mt-4" htmlFor="inputPassword">{languagePreference.password}</label>
                 <input type="password" className="form-control" placeholder={languagePreference.password}
                        id="inputPassword" onChange={(e) => setNewUser({...newUser, password: e.target.value})}/>
+                <h1>Upload a Profile Pic/ Profile Pic Upload</h1>
+                {/*This doesn't look great for now, there is a side quest to maybe style it with slectors, so will revistit it later, but at least for now it is funcitonal yay!*/}
+                <FileBase64 type ="file" multiple={false} onDone={({base64}) => setNewUser({...newUser, profilePic: base64})}/>
+
                 <div className="btn-group list-group-item mt-2 col mb-2" role="group" aria-label="Basic radio toggle button group">
                     <input type="radio" className="btn-check" name="accountType" id="ac1" autoComplete="off" value="PEN" onChange= {(event) => setNewUser({...newUser, role: event.target.value})} required/>
                     <label className="btn btn-outline-primary" htmlFor="ac1">Pen</label>
