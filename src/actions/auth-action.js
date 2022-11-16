@@ -4,7 +4,9 @@ export const GET_PROFILE = 'GET_PROFILE';
 export const LOGOUT = 'LOGOUT';
 
 export const getProfile = async (dispatch) => {
+    console.log("dispatchcalled");
     const userProfile = await authService.profile();
+    console.log(userProfile, "userprofile from get")
     dispatch({
         type: GET_PROFILE,
         userProfile
@@ -18,5 +20,38 @@ export const logout = async (dispatch) => {
     dispatch({
         type: LOGOUT
     });
+    return response;
+}
+
+//the logged in user
+export const updateUser = async (dispatch, user) => {
+    console.log(user, "user");
+    const response = await authService.updateUser(user._id, user);
+    console.log(response);
+    //Since there is no concept of a local modified version of the profile like we have with
+    //subset of letters an things, for parities sake we will count on the authentication controller
+    //updating the session, and then we just poll the session again and update the reducer accordingly. also
+    //helps deal with population stuff I believe.
+    getProfile(dispatch);
+}
+
+export const acceptCollaboration = async (dispatch, pid, uid) => {
+    const response = await authService.acceptCollaboration(pid, uid);
+    getProfile(dispatch);
+    console.log(response, "accept Response");
+    return response;
+}
+
+export const requestsCollaboration = async (dispatch, pid, uid) => {
+    const response = await authService.requestsCollaboration(pid, uid);
+    getProfile(dispatch);
+    console.log(response, "request Response");
+    return response;
+}
+
+export const follow = async (dispatch, pid, uid) => {
+    const response = await authService.follow(pid, uid);
+    getProfile(dispatch);
+    console.log(response, "follow Response");
     return response;
 }

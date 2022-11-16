@@ -1,6 +1,7 @@
 import React from "react";
 import {Link, Outlet} from "react-router-dom";
 import NavigationSidebar from "./navigation-sidebar";
+import ConnectionsSidebar from "./connections-sidebar";
 import languagePreferenceReducer from "../../reducers/language-preference-reducer";
 //Had to remeber to install these pacakages via npm install. Not quite sure if --save was necessary here but did it in anycase. Dont think it can jurt anything
 //But in case it does now we have a note of what we did
@@ -20,7 +21,7 @@ const Appendre = () => {
                 <Outlet/>
             </div>
             <div className="d-none d-lg-block col-lg-4 col-xl-4">
-                <h1>TBD</h1>
+                <ConnectionsSidebar/>
             </div>
         </div>
     );

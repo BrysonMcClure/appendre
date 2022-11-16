@@ -4,6 +4,7 @@ import * as authAction from "../../../actions/auth-action";
 import * as authService from "../../../services/auth-service"
 import PublicUserDetails from "../public-user-details";
 import {useParams} from "react-router-dom";
+import Connection from "../../appendre/Connection";
 
 const PublicProfile = () => {
 
@@ -30,7 +31,8 @@ const PublicProfile = () => {
     return (
         <div>
             {/*console.log(searchedProfile)*/}
-            {searchedProfile && <PublicUserDetails profile={searchedProfile}/>}
+            {searchedProfile && <PublicUserDetails profile={searchedProfile} otherUser={true}/>}
+            <Connection profile={profile} user={searchedProfile}/>
         </div>
     )
 

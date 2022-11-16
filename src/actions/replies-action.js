@@ -16,6 +16,11 @@ export const REPLY_TO_LETTER = 'REPLY_TO_LETTER';
 export const replyToLetter = async (dispatch, author, reply, parentLetter) => {
     const addedReply = await repliesService.replyToLetter(author, reply, parentLetter);
     //Modify, both reducer and server, by updating the parent letter with the id of the newely created/ added reply.
+    //locally editing the parent letter with update state before writing it to reducer and such
+    //because we need reducer parody. dont do this for author since we dont have a state var for it i guess? so
+    //its ok for service to ahndle that directly. should that be here or there in terms of service stuff? idk.
+    //woudl require another service update call. IDk man, this is all getting really confusing and messy and populate
+    //is starting to cause some real problems.
     parentLetter.replies.push(addedReply._id);
     const updatedLetter = await lettersAction.updateLetter(dispatch, parentLetter);
 }

@@ -38,7 +38,12 @@ const englishStrings = {
     resultsFor: 'Results for',
     with: 'with',
     matching: 'matching',
-    viewProfile: 'View Profile'
+    viewProfile: 'View Profile',
+    following: 'Following',
+    pensIFollow: 'Pens I Follow',
+    follow: 'Follow',
+    collaborate: 'Collaborate',
+    myCollaborators: 'My Collaborators'
 };
 
 export default englishStrings;

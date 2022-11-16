@@ -3,18 +3,18 @@ import axios from "axios";
 //which nativley we could not do programatically i think
 //Will need to be an envrionment variable later
 const API_BASE = 'http://localhost:4000/api'
-const SECURITY_API = `${API_BASE}/session`;
+const LANGUAGE_API = `${API_BASE}/session`;
 
 const api = axios.create({
     withCredentials: true
 })
 
 export const setLanguage = async (language) => {
-    const response = await api.get(`${SECURITY_API}/set/language/${language}`);
+    const response = await api.get(`${LANGUAGE_API}/set/language/${language}`);
     return response.data;
 }
 
 export const getLanguage = async () => {
-    const response = await api.get(`${SECURITY_API}/get/language`);
+    const response = await api.get(`${LANGUAGE_API}/get/language`);
     return response.data;
 }

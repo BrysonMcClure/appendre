@@ -38,7 +38,12 @@ const frenchStrings = {
     resultsFor: 'Resultats pour',
     with: 'avec',
     matching: 'correspondant à',
-    viewProfile: 'Voir Profile'
+    viewProfile: 'Voir Profile',
+    following: 'Suivre',
+    pensIFollow: 'Pens Je Suive',
+    follow: 'Suive',
+    collaborate: 'Collaborer',
+    myCollaborators: 'Mes Collaborateurs'
 };
 
 export default frenchStrings;

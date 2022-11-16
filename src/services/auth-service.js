@@ -61,3 +61,26 @@ export const findUsersByAttribute = async (attribute, value) => {
 
 }
 
+export const updateUser = async (uid, updatedUser) => {
+    console.log("updateUser in service is triggered");
+    const response = await api.put(`${SECURITY_API}/update/${uid}`, updatedUser);
+    console.log(response, "service response data");
+    return response.data;
+}
+
+export const acceptCollaboration = async (pid, uid) => {
+    //Format of pid (currently logged in user, aka profile)/ accepts/ request from uid
+    const response = await api.put(`${SECURITY_API}/${pid}/acceptCollaboration/${uid}`);
+    return response.data;
+}
+
+export const requestsCollaboration = async (pid, uid) => {
+    const response = await api.put(`${SECURITY_API}/${pid}/requestsCollaboration/${uid}`);
+    return response.data;
+}
+
+export const follow = async (pid, uid) => {
+    const response = await api.put(`${SECURITY_API}/${pid}/follow/${uid}`);
+    return response.data;
+}
+

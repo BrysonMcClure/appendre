@@ -1,5 +1,5 @@
 import {GET_PROFILE, LOGOUT} from "../actions/auth-action";
-
+import {UPDATE_USER} from "../actions/users-action";
 //May not life that, need to define a default to establish type? Actually now that I think about it I guess language didnt have to do that, so maybe should be fine?
 //Never mind, language did do that. Lets see.
 //COnfirmed via console error, "initial state may not be undefined". I really think this is a type establishment/ dynamic assignment thing or what ever. Can use null though.
