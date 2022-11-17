@@ -7,6 +7,7 @@ import {calculateNewValue} from "@testing-library/user-event/dist/utils";
 import TagList from "./tag-list";
 import {useParams} from "react-router-dom";
 import Pagination from "../pagination";
+import * as authAction from "../../actions/auth-action"
 
 const CHAR_CAP = 300;
 export const PAGE_SIZE = 7;
@@ -67,7 +68,10 @@ const WriteLetter = () => {
         setNewLetter({...newLetter, tags: newTags.addedTags})
         console.log(newLetter.title, "title before");
         console.log(newLetter.tags);
-        await createLetter(dispatch, newLetter, profile);
+        //I am now responsible for setting author of this letter, I think that is reasonable especially considering now that the new mentallity is useer
+        //writes letter, amkes more snese maybe then letter writing itself? Should this go on server side? Maybe would make it so its impoossible to author a letter when not logged in right?
+        await authAction.writeLetter(dispatch, profile._id, newLetter);
+        //await createLetter(dispatch, newLetter, profile);
         //Reset posting field so it is ready and rarring to go again for another letter.
         //add this letter to my user object. How get from reducer? action return something? can do after dispatch? give this letter posted by attribute?
         //Have letter handle adding to my list of things? Really feels like that should be a user responsibility. Maybe instead the user just regularyl polls

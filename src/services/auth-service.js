@@ -84,3 +84,16 @@ export const follow = async (pid, uid) => {
     return response.data;
 }
 
+export const deleteLetter = async (pid, lid) => {
+    console.log("service is off");
+    const response = await api.delete(`${SECURITY_API}/${pid}/deleteLetter/${lid}`);
+    console.log(response, "service level response");
+    return response.data;
+}
+
+export const writeLetter = async (pid, newLetter) => {
+    const response = await api.post(`${SECURITY_API}/${pid}/writeLetter`, newLetter);
+    console.log(response, "write response");
+    return response.data;
+}
+

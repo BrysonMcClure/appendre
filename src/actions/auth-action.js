@@ -1,4 +1,5 @@
 import * as authService from "../services/auth-service";
+import {CREATE_LETTER, DELETE_LETTER} from "./letters-action";
 
 export const GET_PROFILE = 'GET_PROFILE';
 export const LOGOUT = 'LOGOUT';
@@ -54,4 +55,28 @@ export const follow = async (dispatch, pid, uid) => {
     getProfile(dispatch);
     console.log(response, "follow Response");
     return response;
+}
+
+export const deleteLetter = async (dispatch, pid, letter) => {
+    console.log("I am not triggering");
+    const response = await authService.deleteLetter(pid, letter._id);
+    console.log("getting past this?");
+    console.log(response, "deleteResponse");
+    getProfile(dispatch);
+    dispatch({
+        type: DELETE_LETTER,
+        letter
+    });
+
+    return response;
+}
+
+export const writeLetter = async (dispatch, pid, letter) => {
+    const newLetter = await authService.writeLetter(pid, letter);
+    console.log(newLetter, "addedLetter");
+    getProfile(dispatch);
+    dispatch({
+        type: CREATE_LETTER,
+        newLetter
+    });
 }

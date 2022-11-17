@@ -13,6 +13,7 @@ const SingleLetter = () => {
 
     const languagePreference = useSelector((state) => state.lang);
     const letters = useSelector((state) => state.letters);
+    const profile = useSelector((state) => state.profile);
 
     // const letterToShow = async () => {
     //     const letter = await findLetterById(params.letterId);
@@ -39,7 +40,7 @@ const SingleLetter = () => {
     return(
         <div>
             {console.log(letters)}
-            {letters.length === 1 && <LetterListItem letter={letters[0]} withReplies= {true}/>}
+            {letters.length === 1 && <LetterListItem letter={letters[0]} withReplies={true} editable={letters[0].author._id === profile._id}/>}
         </div>
     );
 }
