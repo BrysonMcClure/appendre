@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import * as authAction from "../../actions/auth-action";
@@ -32,11 +32,46 @@ const PrivateUserDetails = ({profile}) => {
         const response = await authAction.updateUser(dispatch, {...profile, profilePic: newPhoto});
     }
 
+    const [newPassword, setNewPassword] = useState({password: "", confirmedPassword: "", visible: false});
+
+    const togglePasswordVisibility = () => {
+        setNewPassword({...newPassword, visible: !newPassword.visible});
+    }
+
+    const submitPasswordChange = async () => {
+        let response;
+        if(newPassword.password === newPassword.confirmedPassword) {
+            console.log("I am triggering, is this maybe a state thing?")
+            response = await authAction.changePassword(dispatch, {...profile, password: newPassword.password});
+            console.log(response);
+        }
+        if(response && response.modifiedCount === 1) {
+            alert("Password changed succesffuly");
+            newPassword.password = '';
+            newPassword.confirmedPassword = '';
+            setNewPassword({password: "", confirmedPassword: "", visible: false});
+        } else {
+            alert("Passwords must match. Please try again");
+        }
+
+    }
+
 
     return (
         <div>
             <p>Update Profile Pic</p>
             <FileBase64 type ="file" multiple={false} onDone={({base64}) => updateProfilePic(base64)}/>
+            <label className="col-form-label mt-4" htmlFor="inputPassword">{languagePreference.password}</label>
+            <input type="password" className="form-control" placeholder={languagePreference.password} id="inputPassword" value={newPassword.password}
+                   onChange={(e) => setNewPassword({...newPassword, password : e.target.value})}/>
+            <div className="input-group">
+                <input type={newPassword.visible ? "text" : "password"} className="form-control" placeholder={languagePreference.password} id="confirmPassword" value={newPassword.confirmedPassword}
+                       onChange={(e)=> setNewPassword({...newPassword, confirmedPassword: e.target.value})}/>
+                <button type="button" onClick={togglePasswordVisibility}>
+                    <i className={newPassword.visible ? "fas fa-eye-slash" : "fas fa-eye"}/>
+                </button>
+            </div>
+            <button type="button" className="btn btn-primary" onClick={submitPasswordChange}>Change Password</button>
             <h1>Your Password was last changed on: TBD</h1>
             {profile.role === 'PEN' && <PenDetails profile={profile}/>}
             {/*console.log(profile)*/}

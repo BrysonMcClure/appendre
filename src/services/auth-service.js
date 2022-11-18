@@ -97,3 +97,8 @@ export const writeLetter = async (pid, newLetter) => {
     return response.data;
 }
 
+export const changePassword = async (user) => {
+    const response = await api.put(`${SECURITY_API}/changePassword`, user);
+    return response.data;
+}
+

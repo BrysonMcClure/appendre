@@ -86,3 +86,9 @@ export const writeLetter = async (dispatch, pid, letter) => {
     //Just doing this so we can use the id for redirecting for now. Need to know which one was jsut added.
     return newLetter;
 }
+
+export const changePassword = async (dispatch, user) => {
+    const response = await authService.changePassword(user);
+    getProfile(dispatch);
+    return response;
+}
