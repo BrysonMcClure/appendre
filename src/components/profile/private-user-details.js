@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import * as authAction from "../../actions/auth-action";
 import PenDetails from "./pen-details";
+import FileBase64 from 'react-file-base64';
 
 
 const PrivateUserDetails = ({profile}) => {
@@ -27,11 +28,17 @@ const PrivateUserDetails = ({profile}) => {
         console.log(response);
     }
 
+    const updateProfilePic = async (newPhoto) => {
+        const response = await authAction.updateUser(dispatch, {...profile, profilePic: newPhoto});
+    }
+
 
     return (
         <div>
-            {profile && <h1>Your Password was last changed on: TBD</h1>}
-            {profile.role === 'PEN' && <PenDetails/>}
+            <p>Update Profile Pic</p>
+            <FileBase64 type ="file" multiple={false} onDone={({base64}) => updateProfilePic(base64)}/>
+            <h1>Your Password was last changed on: TBD</h1>
+            {profile.role === 'PEN' && <PenDetails profile={profile}/>}
             {/*console.log(profile)*/}
             <button className="btn btn-secondary" type="button" onClick={logoutUser}>{languagePreference.logout}</button>
         </div>

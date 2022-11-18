@@ -75,11 +75,11 @@ const NavigationBanner = () => {
     //It can be an object, its just that the dependencies propertiy is an array, aka an dependency array and expects a list of arguments it should be watching out for I believe.
 
     return(
-        <div className="row d-flex">
+        <div className="row justify-content-between d-flex">
             {/*Dynamically setting link to redirect to login/home based on logged in or not.*/}
             {/*console.log(profile.username ? '/appendre' : "/")*/}
             <a href={profile.username ? "/appendre" : "/"} className="col"><h1>Appendre</h1></a>
-            <div className="btn-group col list-group-item float-end mt-2" role="group" aria-label="Basic radio toggle button group">
+            <div className="btn-group col list-group-item mt-2 float-end" role="group" aria-label="Basic radio toggle button group">
                 <input type="radio" className="btn-check" name="btnradio" id="btnradio1"
                        autoComplete="off" onChange={frenchClicked} checked={languagePreference === frenchStrings}/>
                 <label className="btn btn-outline-primary" htmlFor="btnradio1">{languagePreference.french}</label>

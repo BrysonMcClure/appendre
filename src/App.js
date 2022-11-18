@@ -54,7 +54,9 @@ function App() {
                               <Route path=":userId"
                                      element={<PublicProfile/>}/>
                           </Route>
-                          <Route path="write-letter/:start/:end"
+                          <Route path="write-letter/:letterId"
+                                 element={<WriteLetter/>}/>
+                          <Route path="write-letter"
                                  element={<WriteLetter/>}/>
                           <Route path="letters/:start/:end"
                                  element={<Letters/>}/>

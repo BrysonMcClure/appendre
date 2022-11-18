@@ -4,7 +4,6 @@ import TagList from "./tag-list";
 import {useNavigate} from "react-router-dom";
 import Replies from "../replies";
 import * as authAction from "../../actions/auth-action";
-
 //withReplies, determines if the letter list item displays the letter's replies or not, false by default.
 //Allows us to use the same method to then render a detailed letter view using the same method later on, might just change it to a detailed mode flag in general if
 //we decided to add other details on single letter view vs list view mode to help make summary and search results pages a little more streamlined maybe. IDK.
@@ -42,6 +41,10 @@ const LetterListItem = ({letter, charCap, withReplies = false, editable= false})
         }
     }
 
+    const editLetter = async () => {
+        navigate(`/appendre/write-letter/${letter._id}`)
+    }
+
     return(
         // <div>
         //     <h1>This is a letter</h1>
@@ -62,6 +65,10 @@ const LetterListItem = ({letter, charCap, withReplies = false, editable= false})
                          <button type="button" className="btn btn-primary float-end" onClick={deleteLetter}>
                             <i className="fas fa-x"/>
                          </button> }
+                    {editable &&
+                        <button type="button" className="btn btn-primary" onClick={editLetter}>
+                            Edit Letter
+                        </button>}
                 </h5>
                 <h5 className="card-subtitle text-muted" onClick={()=> goToUsersPublicProfile()}>{languagePreference.by}: {letter.author && letter.author.username}</h5>
                 {/*If cap is undefined, substring just gives us the whole string, which is exactly the behavior we want, default to full text. Doesnt break without a default value, so fine with out one I do believe*/}

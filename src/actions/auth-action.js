@@ -25,6 +25,9 @@ export const logout = async (dispatch) => {
 }
 
 //the logged in user
+//Using this now for things like updating profile pic, and no longer for sub things
+//like writing a letter, changing how we write/ maybe approach or think about those
+//requests I think maybe. Not necessarily better, just different!
 export const updateUser = async (dispatch, user) => {
     console.log(user, "user");
     const response = await authService.updateUser(user._id, user);
@@ -34,6 +37,7 @@ export const updateUser = async (dispatch, user) => {
     //updating the session, and then we just poll the session again and update the reducer accordingly. also
     //helps deal with population stuff I believe.
     getProfile(dispatch);
+    return response;
 }
 
 export const acceptCollaboration = async (dispatch, pid, uid) => {
@@ -79,4 +83,6 @@ export const writeLetter = async (dispatch, pid, letter) => {
         type: CREATE_LETTER,
         newLetter
     });
+    //Just doing this so we can use the id for redirecting for now. Need to know which one was jsut added.
+    return newLetter;
 }

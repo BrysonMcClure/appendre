@@ -23,7 +23,7 @@ const LandingPage = () => {
 
     function handleClick() {
         //doesnt change when i move a file, since this is fixed relative to what it is set as in the app.js me thinks
-        navigate('/appendre');
+        navigate('/appendre/letters/0/7');
     }
 
     function goToSignup() {

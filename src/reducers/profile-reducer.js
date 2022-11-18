@@ -10,8 +10,8 @@ const profileReducer = (profile = {}, action) => {
         case GET_PROFILE:
             return action.userProfile;
         case LOGOUT:
-            profile = {}
-            return profile;
+            console.log("yup");
+            return {};
         default:
             return profile;
     }

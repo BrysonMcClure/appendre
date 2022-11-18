@@ -1,18 +1,22 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {findAllLetters, createLetter} from "../../actions/letters-action";
+import * as lettersAction from "../../actions/letters-action";
+//not using find all anymore anyway right?
+//import {findAllLetters, createLetter} from "../../actions/letters-action";
 //import {getLanguage} from "../../actions/language-action";
 import LettersList from "./letters-list";
 import {calculateNewValue} from "@testing-library/user-event/dist/utils";
 import TagList from "./tag-list";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Pagination from "../pagination";
 import * as authAction from "../../actions/auth-action"
 
 const CHAR_CAP = 300;
 export const PAGE_SIZE = 7;
 const PAGINATIONSTUB = "/appendre/write-letter";
+export const LETTER_DETAILS_STUB = "/appendre/letterDetails";
 
+//Adding stuff so this same interface can be resused and this same page redirected to to edit a letter
 const WriteLetter = () => {
 
     const languagePreference = useSelector((state) => state.lang);
@@ -20,6 +24,8 @@ const WriteLetter = () => {
     const profile = useSelector((state) => state.profile);
 
     //How many charcters card preview of letter displays before user must follow document subview to be able to access full text
+
+    const navigate = useNavigate();
 
 
     const params = useParams();
@@ -39,7 +45,8 @@ const WriteLetter = () => {
     //user doesnt really have a say/ shouldnt really have a say in their username being associated with the message I think.
     //Should we be responsibble for providing the id? I guess that if we provided it as a path/query param, it would still jsut be
     //a string and not an object unless we sent it in body, which would be the same problem of object definition I think?
-    const [newLetter, setNewLetter] = useState({text: '', title: '', tags: []});
+    //If default is blank this will be blank, else this will be the existing letters stuff right?
+    const [newLetter, setNewLetter] = useState({title: '', text: '', tags: []});
     const [newTags, setNewTags] = useState({draftedTag: '', addedTags: []});
 
     const postLetter = async () => {
@@ -70,7 +77,17 @@ const WriteLetter = () => {
         console.log(newLetter.tags);
         //I am now responsible for setting author of this letter, I think that is reasonable especially considering now that the new mentallity is useer
         //writes letter, amkes more snese maybe then letter writing itself? Should this go on server side? Maybe would make it so its impoossible to author a letter when not logged in right?
-        await authAction.writeLetter(dispatch, profile._id, newLetter);
+        let addedLetter = newLetter;
+        if(letters[0]) {
+            //We have the update letter in this case
+            await lettersAction.updateLetter(dispatch, newLetter);
+        }
+        else {
+            //in this case we need the id to be established/ assigned by the service. I think this is fine right?
+            //A little hack/ peek behind the curtainy maybe, but I think it should be fine for now, also im tired.
+            addedLetter = await authAction.writeLetter(dispatch, profile._id, newLetter);
+        }
+
         //await createLetter(dispatch, newLetter, profile);
         //Reset posting field so it is ready and rarring to go again for another letter.
         //add this letter to my user object. How get from reducer? action return something? can do after dispatch? give this letter posted by attribute?
@@ -79,6 +96,10 @@ const WriteLetter = () => {
         //Reset everything after submit so we are ready and raring to go for the next letter.
         await setNewLetter({text: '', tags: [], title: ''});
         await setNewTags({draftedTag: '',addedTags: []});
+        /*Switching to redirecting away to a new model where we direct you to a detailed view for the lettere, so now you can start receiving
+        * replies, and edit if you need to. I am starting to think now that maybe that makes more sensee then jsut locking and loading for another reply
+        * like we were originally thinking given that these letters should theoretically be a more long involved process maybe right?????????*/
+        navigate(`${LETTER_DETAILS_STUB}/${addedLetter._id}`);
         console.log(newLetter.title, "title after");
     }
 
@@ -88,11 +109,22 @@ const WriteLetter = () => {
 
     //Once on load of page, update all the letters. From there any changes to the reducer will trigger our use selector which selects the prop we are interested in
     //and will give us all that stuff we need then from there and what not ehh?
+    //This was relevant when we were displaying letters, but no longer right?
+    //Should come back is empty if nothing right?
     useEffect(() => {
         async function loadLetter (){
-            await findAllLetters(dispatch);
+            console.log(params.letterId, "hi its me");
+            //update reducer
+            if(params.letterId) {
+                await lettersAction.findLetterById(dispatch, params.letterId);
+            }
         }
         loadLetter();
+        const existingLetter = letters[0];
+        if(existingLetter && existingLetter._id){
+            setNewLetter(existingLetter);
+            setNewTags({...newTags, addedTags: existingLetter.tags});
+        }
     }, []);
 
     //htmlfor and for === same thing???????? hmmmm me no know.
@@ -137,50 +169,61 @@ const WriteLetter = () => {
     //Around/ against page/link servers.
     //Like french and english, PEN should probably be a const huh? in case we dedide to expand upon/ change this later maybe, might be a good idea/ practice
     //Just another thing to look at maybe when we are coming through and doing our little clean up here at the end.
-    return(<div>{profile.role === "PEN" &&
+    return(
         <div>
-            <h1>{languagePreference.writeALetter}</h1>
-            <h1>Need to work on automatic rerouting if state gets undefined.</h1>
-            <div className="form-group">
-                <label htmlFor='titleField' className="col-form-label mt-4">{languagePreference.title}</label>
-                <input className="form-control" id='titleField' value={newLetter.title} placeholder= {languagePreference.title}
-                       onChange={(event) => setNewLetter({...newLetter, title: event.target.value})}/>
-            </div>
-            <div className="md-form ttr-textArea form-floating">
-                <textarea className="lg-textarea form-control" id='wal' value={newLetter.text} placeholder={languagePreference.whatDoYouWantToSay}
-                          onChange={(event) => setNewLetter({...newLetter, text: event.target.value})}/>
-                <label htmlFor='wal'>{languagePreference.whatDoYouWantToSay}?</label>
-            </div>
-            <div className="form-group">
-                <label htmlFor="tagsField" className ="col-form-label mt-4">{languagePreference.tags}</label>
-                <div className="input-group">
-                    <input className= "form-control" id="tagsField" value={newTags.draftedTag} placeholder={languagePreference.tags}
-                           onChange={(event) => setNewTags({...newTags, draftedTag: event.target.value})}/>
-                    <button className="btn btn-primary" type="button" id="tagsFieldButton" onClick={confirmTag}>{languagePreference.add}</button>
+            {profile.users === "PenUser" &&
+            <div>
+                <h1>{languagePreference.writeALetter}</h1>
+                {/*<h1>Need to work on automatic rerouting if state gets undefined.</h1>
+                I think approach may be shifting from authmatic rerouting to instead just guarding pages against undefined need elements
+                like profile and just not rendiering so going to a page manually that you shouldnt be on just doesnt do anything as opposed to dynamically
+                throwing you back to the main, I think this may actually bettter to show the page does actually exist, its just not relevant to you yet, i think thats fine right
+                that actually reminds me we should add that thing to react router dom someone mentioned before I think back when we were looking at
+                query params things where we have a default route. Trying to remeber back now to that tutorial and its all a little foggy, but just talking ot myself
+                here im pretty sure the big take away there was just using outlets vs not using outlets for rending content based on having a defined
+                query param, kind of like, strike that, very much like what we are doing now for searchees, so we did actually infact end up using that
+                one way of doing it/ example from that other online example which we abstracted then I do believe. Nice.*/}
+                <div className="form-group">
+                    <label htmlFor='titleField' className="col-form-label mt-4">{languagePreference.title}</label>
+                    <input className="form-control" id='titleField' value={newLetter.title} placeholder= {languagePreference.title}
+                           onChange={(event) => setNewLetter({...newLetter, title: event.target.value})}/>
                 </div>
-                <TagList tagList={newTags.addedTags}/>
-            </div>
-            {/*Cols auto, good to know little feature, worked out quite well for us here*/}
-            {/*<div className="row-cols-auto">*/}
-            {/*    //Lets make this a component that way we can export it and also use it on our cards and on our document reference screen.*/}
-            {/*    {newTags.addedTags.map((tag) => {*/}
-            {/*        return (<span className="badge rounded-pill bg-primary">{tag}</span>);*/}
-            {/*    })}*/}
-            {/*</div>*/}
+                <div className="md-form ttr-textArea form-floating">
+                    <textarea className="lg-textarea form-control" id='wal' value={newLetter.text} placeholder={languagePreference.whatDoYouWantToSay}
+                              onChange={(event) => setNewLetter({...newLetter, text: event.target.value})}/>
+                    <label htmlFor='wal'>{languagePreference.whatDoYouWantToSay}?</label>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="tagsField" className ="col-form-label mt-4">{languagePreference.tags}</label>
+                    <div className="input-group">
+                        <input className= "form-control" id="tagsField" value={newTags.draftedTag} placeholder={languagePreference.tags}
+                               onChange={(event) => setNewTags({...newTags, draftedTag: event.target.value})}/>
+                        <button className="btn btn-primary" type="button" id="tagsFieldButton" onClick={confirmTag}>{languagePreference.add}</button>
+                    </div>
+                    <TagList tagList={newTags.addedTags}/>
+                </div>
+                {/*Cols auto, good to know little feature, worked out quite well for us here*/}
+                {/*<div className="row-cols-auto">*/}
+                {/*    //Lets make this a component that way we can export it and also use it on our cards and on our document reference screen.*/}
+                {/*    {newTags.addedTags.map((tag) => {*/}
+                {/*        return (<span className="badge rounded-pill bg-primary">{tag}</span>);*/}
+                {/*    })}*/}
+                {/*</div>*/}
 
-            <button type="button" className="btn btn-primary mt-2" onClick={postLetter}>{languagePreference.post}</button>
+                <button type="button" className="btn btn-primary mt-2" onClick={postLetter}>{languagePreference.post}</button>
 
 
-            {/*/DONE!Should be a component later, makes it more reusable later probably too*/}
-            {letters.length >= 1 && <LettersList
-                lettersList = {letters.slice(params.start,params.end)} charCap = {CHAR_CAP}/>}
-            {/*No pagination link provided, assumed no pagination wanted to be rendered
-            Moving Pagination here to the bottom of the navigating page as opposed to tacking onto the end of the letters-list. Techinically I think both approaches are valid, me attaching it, or having it as an optional feature/
-            attribute of the rednered navigable content, so technically I reserve the right to do both, but just going to try it here for now, theoretically it is now ever so slightly more reusable/ less middle man steps to pass stuff around
-            and less repeated/ double up calculation maybe? IDK man I don't know.*/}
-            {letters.length > 1 && <Pagination linkStub={PAGINATIONSTUB}
-                                               listSize={letters.length} elementsPerPage={PAGE_SIZE} currentStartIndex={params.start}/>}
-        </div>}</div>
+                {/*/DONE!Should be a component later, makes it more reusable later probably too*/}
+                {/*{letters.length >= 1 && <LettersList*/}
+                {/*    lettersList = {letters.slice(params.start,params.end)} charCap = {CHAR_CAP}/>}*/}
+                {/*No pagination link provided, assumed no pagination wanted to be rendered
+                Moving Pagination here to the bottom of the navigating page as opposed to tacking onto the end of the letters-list. Techinically I think both approaches are valid, me attaching it, or having it as an optional feature/
+                attribute of the rednered navigable content, so technically I reserve the right to do both, but just going to try it here for now, theoretically it is now ever so slightly more reusable/ less middle man steps to pass stuff around
+                and less repeated/ double up calculation maybe? IDK man I don't know.*/}
+                {/*{letters.length > 1 && <Pagination linkStub={PAGINATIONSTUB}*/}
+                {/*                                   listSize={letters.length} elementsPerPage={PAGE_SIZE} currentStartIndex={params.start}/>}*/}
+            </div>}
+        </div>
 
     )
 };
