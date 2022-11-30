@@ -9,7 +9,8 @@ const Replies = ({replies, parentLetter, withEditor = false}) => {
             that would require a change to replylistitem, not sure exactly just yet how we want to do that. will play around with the styling a bit more, later,
             once we can see what it looks like*/}
             {withEditor && <DraftReply parentLetter={parentLetter}/>}
-            {replies && <RepliesList replies={replies}/>}
+            {replies && <RepliesList replies={replies} parentLetter={parentLetter}/>}
+            {console.log(parentLetter, "ParentLetter")}
         </div>);
 
 }

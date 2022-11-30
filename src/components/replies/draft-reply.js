@@ -26,7 +26,8 @@ const DraftReply = ({parentLetter}) => {
 
     const submitReply = () => {
         //works well because same dispatch will ultimately be passed along to the letter update method via our reply middle man structure.
-        repliesAction.replyToLetter(dispatch, profile, newReply, parentLetter);
+        //repliesAction.replyToLetter(dispatch, profile, newReply, parentLetter);
+        authAction.replyTo(dispatch, profile._id, parentLetter._id, newReply);
         //Reset Text field for a new reply so it is ready and raring to go should we decide to add one.
         setNewReply({...newReply, text: ''});
         //Profile is the author, as we can be very reasonably certain it is the currently logged in Pen user writing this.

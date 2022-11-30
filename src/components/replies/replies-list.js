@@ -2,7 +2,7 @@ import React from "react";
 import {useSelector} from "react-redux";
 import ReplyListItem from "./reply-list-item"
 
-const RepliesList = ({replies}) => {
+const RepliesList = ({replies, withFeedbackEditor, parentLetter}) => {
 
     const languagePreference = useSelector((state) => state.lang);
     //argument for making each one of these a card rather than a list item, we could have them in a parent reply elemnt for the replies with editor leter detail screen,
@@ -16,7 +16,7 @@ const RepliesList = ({replies}) => {
             <h3 className="list-group-item">{languagePreference.replies}: </h3>
             <ul className="list-group list-group-flush m-4">
                 {replies && replies.map((reply) => {
-                    return(<ReplyListItem reply={reply} key={reply.date}/>);
+                    return(<ReplyListItem reply={reply} withFeedbackEditor={withFeedbackEditor} parentLetter={parentLetter} key={reply.date}/>);
                 })}
             </ul>
         </div>

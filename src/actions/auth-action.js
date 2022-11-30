@@ -1,5 +1,5 @@
 import * as authService from "../services/auth-service";
-import {CREATE_LETTER, DELETE_LETTER} from "./letters-action";
+import {CREATE_LETTER, DELETE_LETTER, UPDATE_LETTER} from "./letters-action";
 
 export const GET_PROFILE = 'GET_PROFILE';
 export const LOGOUT = 'LOGOUT';
@@ -91,4 +91,33 @@ export const changePassword = async (dispatch, user) => {
     const response = await authService.changePassword(user);
     getProfile(dispatch);
     return response;
+}
+
+//Nothing changed because its all references, but we do need to recall and repopulate the letter so
+//through the trickle down we get an updated later with the new feedback populated I think right??
+export const provideFeedback = async (dispatch, pid, rid, feedback) => {
+    const updatedLetter = await authService.provideFeedback(pid, rid, feedback);
+    dispatch({
+        type: UPDATE_LETTER,
+        updatedLetter
+    })
+    return updatedLetter;
+}
+
+//Again, we determined this all belongs here again because of the responsibility of the auth service to authenticate
+//the only person creating documents is the logged in user right ehhhhhh?
+export const replyTo = async(dispatch, pid, lid, reply) => {
+    const updatedLetter = await  authService.replyTo(pid, lid, reply);
+    dispatch({
+        type: UPDATE_LETTER,
+        updatedLetter
+    })
+    getProfile(dispatch);
+    //Also, update profile to maintain parody with session which added the new reply to the users list of replies, still on the newly found fence of whethere or not we want to
+    //get rid of that reference system. It makes a lot of sense for a letter keeeping track of its replues, but should a user keep track of what they wrote in thish way or could we
+    //just have an endpoitn request for that? I do believe there is precenedent in one of the tuiter examples from the assignment discussing that and ahving
+    //one to many requests for just getting all this letters a user wrote for example since they are all signed with our ids anyway. Idk man, again this all gets very complex very fast.
+    //I still do favor though using populate wherever possible over constantly making me responsible for polling for the details on a piece of data by using its id only,
+    //feels much cleaner this way / + and like kind of one of the points why object id references exists in this way anyway maybe. hmmmmmm?
+    return updatedLetter;
 }

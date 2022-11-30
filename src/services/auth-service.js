@@ -102,3 +102,15 @@ export const changePassword = async (user) => {
     return response.data;
 }
 
+//See this is also a put request which returns something, so again totally fine given the letter just so happening to be the current target I guess right ehhh? No shade to replyies at all.
+export const provideFeedback = async (pid, rid, feedback) => {
+    const response = await api.put(`${SECURITY_API}/${pid}/provideFeedback/${rid}`, feedback);
+    console.log(response.data, "feedback response thingy may be the issue with reducer not updating right away thingy maybe idk hmmmm? would point to a service issue but legitamatley with this its easier/ faster maybe to do it this way instead of having to relogin and restart the service then lol man. ")
+    return response.data;
+}
+
+export const replyTo = async (pid, lid, reply) => {
+    const response = await api.put(`${SECURITY_API}/${pid}/replyTo/${lid}`, reply);
+    console.log(response.data, "reply repsonse data");
+    return response.data;
+}

@@ -64,7 +64,7 @@ const NavigationSidebar = ({active = '/profile'}) => {
             {profile._id && <a href="/appendre/profile" className="list-group-item list-group-item-action active">{languagePreference.profile}</a>}
             <a href={`/appendre/letters/0/${PAGE_SIZE}`} className="list-group-item list-group-item-action">{languagePreference.trending_letters}</a>
             <a href={SEARCH_LINK} className="list-group-item list-group-item-action">{languagePreference.search}</a>
-            {profile._id &&
+            {profile.users === 'PenUser' &&
                 <a href={WRITE_LETTER_LINK} className="list-group-item list-group-item-action">{languagePreference.writeALetter}</a>
             }
 
