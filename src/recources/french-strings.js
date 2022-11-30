@@ -43,7 +43,16 @@ const frenchStrings = {
     pensIFollow: 'Pens Je Suive',
     follow: 'Suive',
     collaborate: 'Collaborer',
-    myCollaborators: 'Mes Collaborateurs'
+    myCollaborators: 'Mes Collaborateurs',
+    currentPassword: 'Mot De Passe Actuel',
+    newPassword: 'Nouveau Mot De Passe',
+    confirmPassword: 'Vérifier Le Mot De Passe',
+    submitFeedback: 'Submit les Remarques',
+    feedback: 'Remarques',
+    changePassword: 'Changer Le Mot De Passe',
+    profilePic: 'Photo Public',
+    updateProfilePic: 'Change Ma Photo',
+    viewLettersByThisPen: 'Voir Les Lettres De Cette Pen'
 };
 
 export default frenchStrings;

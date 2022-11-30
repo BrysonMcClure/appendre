@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import * as authAction from "../../../actions/auth-action";
 import * as authService from "../../../services/auth-service"
 import PublicUserDetails from "../public-user-details";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Connection from "../../appendre/Connection";
 
 const PublicProfile = () => {
@@ -28,10 +28,19 @@ const PublicProfile = () => {
         //setProfile(getUser());
     }, []);
 
+    const navigate = useNavigate();
+
+    const goToLetters = () => {
+        navigate(`/appendre/search/letters-search/0/7?author=${searchedProfile.username}`);
+    }
+
     return (
         <div>
             {/*console.log(searchedProfile)*/}
             {searchedProfile && <PublicUserDetails profile={searchedProfile} otherUser={true}/>}
+            <div>
+                {(profile.users && profile.users === "PenUser") &&<button type='button' className="btn btn-primary" onClick={goToLetters}>{languagePreference.viewLettersByThisPen}</button>}
+            </div>
             <Connection profile={profile} user={searchedProfile}/>
         </div>
     )

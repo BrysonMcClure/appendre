@@ -75,18 +75,25 @@ const NavigationBanner = () => {
     //It can be an object, its just that the dependencies propertiy is an array, aka an dependency array and expects a list of arguments it should be watching out for I believe.
 
     return(
-        <div className="row justify-content-between d-flex">
-            {/*Dynamically setting link to redirect to login/home based on logged in or not.*/}
-            {/*console.log(profile.username ? '/appendre' : "/")*/}
-            <a href={profile.username ? "/appendre" : "/"} className="col"><h1>Appendre</h1></a>
-            <div className="btn-group col list-group-item mt-2 float-end" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" className="btn-check" name="btnradio" id="btnradio1"
-                       autoComplete="off" onChange={frenchClicked} checked={languagePreference === frenchStrings}/>
-                <label className="btn btn-outline-primary" htmlFor="btnradio1">{languagePreference.french}</label>
-                <input type="radio" className="btn-check" name="btnradio" id="btnradio2"
-                       autoComplete="off" onChange={englishClicked} checked={languagePreference === englishStrings}/>
-                <label className="btn btn-outline-primary" htmlFor="btnradio2">{languagePreference.english}</label>
+        <div>
+            <div className="row">
+                {/*Dynamically setting link to redirect to login/home based on logged in or not.*/}
+                {/*console.log(profile.username ? '/appendre' : "/")*/}
+                <div className="col">
+                    <a href={profile.username ? "/appendre" : "/"} className="col"><h1>Appendre</h1></a>
+
+                </div>
+                <div className="btn-group mt-2 col-auto" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" className="btn-check" name="btnradio" id="btnradio1"
+                           autoComplete="off" onChange={frenchClicked} checked={languagePreference === frenchStrings}/>
+                    <label className="btn btn-outline-primary" htmlFor="btnradio1">{languagePreference.french}</label>
+                    <input type="radio" className="btn-check" name="btnradio" id="btnradio2"
+                           autoComplete="off" onChange={englishClicked} checked={languagePreference === englishStrings}/>
+                    <label className="btn btn-outline-primary" htmlFor="btnradio2">{languagePreference.english}</label>
+                </div>
+
             </div>
+
             <div>{profile.username ? `Logged in As ${profile.username}` : ''}</div>
         </div>
     )

@@ -59,23 +59,34 @@ const PrivateUserDetails = ({profile}) => {
 
     return (
         <div>
-            <p>Update Profile Pic</p>
-            <FileBase64 type ="file" multiple={false} onDone={({base64}) => updateProfilePic(base64)}/>
-            <label className="col-form-label mt-4" htmlFor="inputPassword">{languagePreference.password}</label>
-            <input type="password" className="form-control" placeholder={languagePreference.password} id="inputPassword" value={newPassword.password}
-                   onChange={(e) => setNewPassword({...newPassword, password : e.target.value})}/>
-            <div className="input-group">
-                <input type={newPassword.visible ? "text" : "password"} className="form-control" placeholder={languagePreference.password} id="confirmPassword" value={newPassword.confirmedPassword}
-                       onChange={(e)=> setNewPassword({...newPassword, confirmedPassword: e.target.value})}/>
-                <button type="button" onClick={togglePasswordVisibility}>
-                    <i className={newPassword.visible ? "fas fa-eye-slash" : "fas fa-eye"}/>
-                </button>
+            <div className="form-control">
+                <h3>{languagePreference.updateProfilePic}</h3>
+                <FileBase64 type ="file" multiple={false} onDone={({base64}) => updateProfilePic(base64)}/>
             </div>
-            <button type="button" className="btn btn-primary" onClick={submitPasswordChange}>Change Password</button>
-            <h1>Your Password was last changed on: TBD</h1>
+
+            <div className="form-control">
+                <h3>{languagePreference.changePassword}</h3>
+                {/*<label className="col-form-label" htmlFor="inputPassword">{languagePreference.password}</label>*/}
+                <input type="password" className="form-control" placeholder={languagePreference.newPassword} id="inputPassword" value={newPassword.password}
+                       onChange={(e) => setNewPassword({...newPassword, password : e.target.value})}/>
+                <div className="input-group">
+                    <input type={newPassword.visible ? "text" : "password"} className="form-control" placeholder={languagePreference.confirmPassword} id="confirmPassword" value={newPassword.confirmedPassword}
+                           onChange={(e)=> setNewPassword({...newPassword, confirmedPassword: e.target.value})}/>
+                    <button type="button" onClick={togglePasswordVisibility}>
+                        <i className={newPassword.visible ? "fas fa-eye-slash" : "fas fa-eye"}/>
+                    </button>
+                </div>
+                <button type="button" className="btn btn-primary" onClick={submitPasswordChange}>{languagePreference.changePassword}</button>
+            </div>
+            {/*<h1>Your Password was last changed on: TBD</h1>
+            Just getting rid of this for now. I think i initially thought all properties had a default way to get when they were updated, but
+            it looks like password would have to change from being a simple string all the way to a sub schema with a timestamps option, which
+            would breeak all of the other stuff and current accounts once we do it, so im going to have to maybe take that on once we move to the new
+            db and just leaving it off for now while we are workingo n other features so we dont go bbreaking all of our test accounts just yet,
+            would be a crazy amount of I would assume then latter not necessary checks to implemenet it now ehh?*/}
             {profile.role === 'PEN' && <PenDetails profile={profile}/>}
             {/*console.log(profile)*/}
-            <button className="btn btn-secondary" type="button" onClick={logoutUser}>{languagePreference.logout}</button>
+            {/*<button className="btn btn-secondary" type="button" onClick={logoutUser}>{languagePreference.logout}</button>*/}
         </div>
     )
 };

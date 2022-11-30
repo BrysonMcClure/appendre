@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useLocation} from "react-router-dom";
 import NavigationSidebar from "./navigation-sidebar";
 import ConnectionsSidebar from "./connections-sidebar";
 import languagePreferenceReducer from "../../reducers/language-preference-reducer";
@@ -15,10 +15,18 @@ const Appendre = () => {
 
     const profile = useSelector((state) => state.profile);
 
+    const location = useLocation();
+
+    console.log(location.pathname.split('/'));
+
+    //FOr now these are all top level things, so it should be fine right ehhh???????
+
+    const currentParentPage = location.pathname.split('/')[2];
+
     return(
         <div className="row mt-2">
             <div className="col-3">
-                <NavigationSidebar/>
+                <NavigationSidebar active={currentParentPage}/>
             </div>
             <div className={profile._id ? "col-7 col-lg-5 col-xl-5" : "col-9"}>
                 <Outlet/>

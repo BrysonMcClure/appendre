@@ -40,7 +40,7 @@ const Connection = ({profile, user}) => {
 
     return(
         <div>
-            {followed && <p>Following <i className="fas fa-check"></i></p>}
+            {followed && <h3>Following <i className="fas fa-check"></i></h3>}
             {(collabStatus && collabStatus.status === 'PENDING') && <p>Request Pending</p>}
             {(collabStatus && collabStatus.status === 'ACTIVE') && <p>Active Collaborator</p>}
             {(collabStatus && collabStatus.status === 'REQUESTED') && <p>Pending Your Approval</p>}

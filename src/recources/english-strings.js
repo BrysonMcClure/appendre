@@ -3,9 +3,9 @@ const englishStrings = {
     about_appendre:'The world\'s foremost French Learning Pen Pal Sight',
     login: 'Login',
     logout: 'Logout',
-    username: 'username',
-    password: 'password',
-    signup: 'signup',
+    username: 'Username',
+    password: 'Password',
+    signup: 'Signup',
     continue_as_guest: 'Continue as guest',
     profile: 'Profile',
     trending_letters: 'Trending Letters',
@@ -43,7 +43,16 @@ const englishStrings = {
     pensIFollow: 'Pens I Follow',
     follow: 'Follow',
     collaborate: 'Collaborate',
-    myCollaborators: 'My Collaborators'
+    myCollaborators: 'My Collaborators',
+    currentPassword: 'Current Password',
+    newPassword: 'New Password',
+    confirmPassword: 'Confirm Password',
+    submitFeedback: 'Submit Feedback',
+    feedback: 'Feedback',
+    changePassword: 'Change Password',
+    profilePic: 'Profile Pic',
+    updateProfilePic: 'Update Profile Pic',
+    viewLettersByThisPen: 'View Letters By This Pen'
 };
 
 export default englishStrings;
