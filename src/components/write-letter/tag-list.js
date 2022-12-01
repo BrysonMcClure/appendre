@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 
 const TagList = ({tagList}) => {
 
-    const languagePreference = useSelector((state) => state.lang);
+    //const languagePreference = useSelector((state) => state.lang);
 
     //Want to add an ex button on the editing screen, but i think the best way to do this would require making the draft tags list a reducer
     //So going to just leave them as uneditable and come back to this later. Lot of work, small add, so lower priority right now while we get the rest of the sight set up.
