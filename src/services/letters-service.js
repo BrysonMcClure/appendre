@@ -1,6 +1,6 @@
 import axios from "axios";
+import {API_BASE} from "./api-base";
 
-export const API_BASE = 'http://localhost:4000/api'
 const LETTERS_API = `${API_BASE}/letters`
 
 const api = axios.create({

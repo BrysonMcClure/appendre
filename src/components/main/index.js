@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 /*{useEffect}*/
 import {Outlet} from "react-router-dom";
 import {Provider} from "react-redux";
@@ -8,7 +8,7 @@ import profileReducer from "../../reducers/profile-reducer";
 //Had to remeber to install these pacakages via npm install. Not quite sure if --save was necessary here but did it in anycase. Dont think it can jurt anything
 //But in case it does now we have a note of what we did
 import {combineReducers, createStore} from "redux";
-import {setLanguage} from "../../actions/language-action";
+//import {setLanguage} from "../../actions/language-action";
 import NavigationBanner from "./navigation-banner";
 const reducer = combineReducers({lang: languagePreferenceReducer, letters: lettersReducer, profile: profileReducer});
 //const store = createStore(languagePreferenceReducer);

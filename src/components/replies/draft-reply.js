@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import * as authAction from "../../actions/auth-action"
-import * as repliesAction from "../../actions/replies-action"
 
 //Letter is the authoring Letter to which this reply will be bound/ the child of.
 const DraftReply = ({parentLetter}) => {
@@ -22,7 +21,7 @@ const DraftReply = ({parentLetter}) => {
             await authAction.getProfile(dispatch);
         }
         loadProfile();
-    }, []);
+    }, [dispatch]);
 
     const submitReply = () => {
         //works well because same dispatch will ultimately be passed along to the letter update method via our reply middle man structure.

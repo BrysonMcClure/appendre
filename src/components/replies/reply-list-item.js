@@ -28,7 +28,7 @@ const ReplyListItem = ({reply, parentLetter}) => {
             {reply.feedback &&
              <div>
                  {/*console.log(reply)*/}
-                 {reply.feedback.author && <p>Feedback From: {reply.feedback.author.username}</p>}
+                 {reply.feedback.author && <p>{languagePreference.feedback}{languagePreference.by}: {reply.feedback.author.username}</p>}
                  <p>{reply.feedback.text}</p>
              </div>}
         </li>

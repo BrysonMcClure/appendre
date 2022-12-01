@@ -55,11 +55,13 @@ const SignUp = () => {
         checkName();
     }
 
-    useEffect(checkUserNameAvailability, [newUser.username]);
+    useEffect(checkUserNameAvailability, [newUser, newUser.username]);
+    //so now fires whenever newuser in general changes ehh? Is that a problem with thi snow over firing ehh?
+    //Is that a thing that could ever usually ever really be a problem in most cases hmmm? idk man.
 
-    const tester = (value) => {
-        console.log(value.value);
-    }
+    // const tester = (value) => {
+    //     console.log(value.value);
+    // }
 
     return(
         <div>

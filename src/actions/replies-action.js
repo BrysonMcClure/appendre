@@ -23,4 +23,5 @@ export const replyToLetter = async (dispatch, author, reply, parentLetter) => {
     //is starting to cause some real problems.
     parentLetter.replies.push(addedReply._id);
     const updatedLetter = await lettersAction.updateLetter(dispatch, parentLetter);
+    return updatedLetter;
 }

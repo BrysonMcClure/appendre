@@ -52,7 +52,11 @@ const frenchStrings = {
     changePassword: 'Changer Le Mot De Passe',
     profilePic: 'Photo Public',
     updateProfilePic: 'Change Ma Photo',
-    viewLettersByThisPen: 'Voir Les Lettres De Cette Pen'
+    viewLettersByThisPen: 'Voir Les Lettres De Cette Pen',
+    requestPending: 'Demand en Attente',
+    activeCollaborator: 'Collaberateur Actuel',
+    pendingYourApproval: 'En Attent De Votre Approbation',
+    accept: 'Accepte'
 };
 
 export default frenchStrings;

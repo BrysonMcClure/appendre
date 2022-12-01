@@ -6,7 +6,7 @@ import './vendors/bootstrap/bootstrap-5.1.3-dist/css/bootstrap.min.css';
 //Our Bootswatch override theme library
 import './vendors/bootstrap/bootstrap.min.css';
 import './vendors/fontawesome-free-6.2.0-web/css/all.min.css';
-import HelloWorld from "./components/hello-world";
+//import HelloWorld from "./components/hello-world";
 import LandingPage from "./components/landing-page";
 import Appendre from "./components/appendre";
 import Signup from "./components/signup";

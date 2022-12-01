@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react";
-import * as authService from "../../services/auth-service"
-import * as authAction from "../../actions/auth-action"
-import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import PenDetails from "./pen-details";
-import {getLanguage} from "../../actions/language-action";
-import {getProfile} from "../../actions/auth-action";
+import React from "react";
+//import * as authService from "../../services/auth-service"
+//import * as authAction from "../../actions/auth-action"
+//import {useNavigate} from "react-router-dom";
+//import {useSelector} from "react-redux";
+// import PenDetails from "./pen-details";
+// import {getLanguage} from "../../actions/language-action";
+// import {getProfile} from "../../actions/auth-action";
 import {Outlet} from "react-router-dom";
 
 const Profile= () => {
-    const languagePreference = useSelector((state) => state.lang);
+    //const languagePreference = useSelector((state) => state.lang);
     ///console.log(languagePreference);
     //totally should make this a recuder later I think.
     //const [profile, setProfile] = useState({});

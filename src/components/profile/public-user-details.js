@@ -1,10 +1,12 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
 
 //All this does is render the profile given to it, should not be responsible for getting profile and or calling get, or using params,
 //that should be the responsibility of public or private who is calling it/ asking it to render a profile display thingy for us.
-const PublicUserDetails = ({profile, otherUser = false}) => {
+
+//a relic of sorts from when we were going to do this a different way right? ehhhh?
+//, otherUser = false
+const PublicUserDetails = ({profile}) => {
 
     const languagePreference = useSelector((state) => state.lang);
     //const profile = useSelector((state) => state.profile);
@@ -22,7 +24,7 @@ const PublicUserDetails = ({profile, otherUser = false}) => {
                     {/*     viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">*/}
                     {/*    <rect width="100%" height="100%" fill="#868e96"></rect>*/}
                     {/*</svg>*/}
-                    <img className="img-fluid rounded-circle" width="100%" src={profile.profilePic}/>
+                    <img className="img-fluid rounded-circle" width="100%" src={profile.profilePic} alt={languagePreference.profilePic}/>
                 </div>
              </div>}
             <div className="col">

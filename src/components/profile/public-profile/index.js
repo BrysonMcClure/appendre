@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import * as authAction from "../../../actions/auth-action";
+import {useSelector} from "react-redux";
 import * as authService from "../../../services/auth-service"
 import PublicUserDetails from "../public-user-details";
 import {useNavigate, useParams} from "react-router-dom";
@@ -15,7 +14,6 @@ const PublicProfile = () => {
     //using the currently logged in user as an example default data. should also be fine even if not logged in maybe?????
     const [searchedProfile, setProfile] = useState(profile);
 
-    const dispatch = useDispatch();
     const params = useParams();
 
     useEffect(() => {
@@ -26,7 +24,8 @@ const PublicProfile = () => {
         }
         getUser();
         //setProfile(getUser());
-    }, []);
+    }, [params.userId]);
+    //will this one work? idk then hmmmmmm?
 
     const navigate = useNavigate();
 

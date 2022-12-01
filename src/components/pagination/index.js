@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 /*
 LinkStub: A link to a page following the format /content/:start/:end
@@ -38,12 +38,13 @@ const Pagination = ({linkStub, searchParams, listSize, elementsPerPage, currentS
     let formatedPageLinks = pageLinks();
 
     //Apears to not be strictly necessary in this case, but I have been burned by this before and It does not appear to be hurting anything so I am going to keep it in here for now.
-    useEffect(() => {
-        async function hello () {
-            formatedPageLinks = await pageLinks();
-        }
-        return hello;
-        }, []);
+    // useEffect(() => {
+    //     async function hello () {
+    //         formatedPageLinks = pageLinks();
+    //     }
+    //     return hello;
+    //     }, []);
+    //May breaek a lot of things, may be fine to leave out for now. Idk yet man. man  this is a lot of tings, but I guess it kinda really does sort of make sesnse I guess for/ given the size and complexity of the app and how much entropy has been built up here ehh?
 
     //Lets look back at those text box examples we looked at for tuiter later on how to do this disabled stuff
     //I think that stuff makes a little more sense now in the context of what we are doing/ have learned now.

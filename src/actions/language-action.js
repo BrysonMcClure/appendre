@@ -13,8 +13,10 @@ export const getLanguage = async (dispatch) => {
 
 export const setLanguage = async (dispatch, language) => {
     const response = await languageService.setLanguage(language);
-    dispatch({
-        type: SET_LANGUAGE,
-        language
-    });
+    if(response) {
+        dispatch({
+                     type: SET_LANGUAGE,
+                     language
+                 });
+    }
 }

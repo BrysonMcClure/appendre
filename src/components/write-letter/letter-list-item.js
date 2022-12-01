@@ -91,10 +91,10 @@ const LetterListItem = ({letter, charCap, withReplies = false, editable= false})
                 <li className="list-group-item">{languagePreference.likes}: {letter && letter.likes} {languagePreference.dislikes}: {letter && letter.dislikes}</li>
                 <li className="list-group-item">Vestibulum at eros</li>
             </ul>
-            <div className="card-body">
-                <a href="#" className="card-link">View Details</a>
-                <a href="#" className="card-link">Another link</a>
-            </div>
+            {/*<div className="card-body">*/}
+            {/*    <a href="#" className="card-link">View Details</a>*/}
+            {/*    <a href="#" className="card-link">Another link</a>*/}
+            {/*</div>*/}
             <div className="card-footer text-muted">
                 {languagePreference.postedOn}: {letter.date && letter.date.substring(0,10)}
             </div>

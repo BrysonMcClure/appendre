@@ -32,6 +32,7 @@ export const followPen = async (dispatch, palUser, penToFollowId) => {
     //Using concat to be very careful about mutating existing array. hmm, still modifying? shouldnt this be creating a new obbjecT???
     const response = await updateUser(dispatch, {...palUser, followedPens: palUser.followedPens.concat([penToFollowId])});
     console.log("after calling update user");
+    return response;
 }
 
 //never mind not doing this, this is ok to put in our service, but does not belong in the action!

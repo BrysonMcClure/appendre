@@ -41,9 +41,9 @@ const Connection = ({profile, user}) => {
     return(
         <div>
             {followed && <h3>Following <i className="fas fa-check"></i></h3>}
-            {(collabStatus && collabStatus.status === 'PENDING') && <p>Request Pending</p>}
-            {(collabStatus && collabStatus.status === 'ACTIVE') && <p>Active Collaborator</p>}
-            {(collabStatus && collabStatus.status === 'REQUESTED') && <p>Pending Your Approval</p>}
+            {(collabStatus && collabStatus.status === 'PENDING') && <p>{languagePreference.requestPending}</p>}
+            {(collabStatus && collabStatus.status === 'ACTIVE') && <p>{languagePreference.activeCollaborator}</p>}
+            {(collabStatus && collabStatus.status === 'REQUESTED') && <p>{languagePreference.pendingYourApproval}</p>}
             {/*Only show the button when we are a logged in Pal, and the person on the list is a pal, only then can we follow them
                             having the () at the end meant the follow button was constantly getting pressed. Why does this happen again? idk,
                             but good to watch out for when having no arguments i guess it is some sort of open thing maybe like a semicolon after

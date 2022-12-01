@@ -1,15 +1,14 @@
 import React from "react";
-import {Link, Outlet, useLocation} from "react-router-dom";
+import {Outlet, useLocation} from "react-router-dom";
 import NavigationSidebar from "./navigation-sidebar";
 import ConnectionsSidebar from "./connections-sidebar";
 import languagePreferenceReducer from "../../reducers/language-preference-reducer";
 //Had to remeber to install these pacakages via npm install. Not quite sure if --save was necessary here but did it in anycase. Dont think it can jurt anything
 //But in case it does now we have a note of what we did
-import {combineReducers, createStore} from "redux";
-import {Provider, useSelector} from "react-redux";
-//const reducer =
-const store = createStore(languagePreferenceReducer);
-
+// import {combineReducers, createStore} from "redux";
+import {useSelector} from "react-redux";
+// //const reducer =
+// const store = createStore(languagePreferenceReducer);
 
 const Appendre = () => {
 
@@ -17,7 +16,7 @@ const Appendre = () => {
 
     const location = useLocation();
 
-    console.log(location.pathname.split('/'));
+    //console.log(location.pathname.split('/'));
 
     //FOr now these are all top level things, so it should be fine right ehhh???????
 

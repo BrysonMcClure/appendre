@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Outlet, useSearchParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {getLanguage} from "../../../actions/language-action";
+import {useSelector} from "react-redux";
+//import {getLanguage} from "../../../actions/language-action";
 import {PAGE_SIZE} from "../../write-letter";
 
 // const ProfileAttributes = {
@@ -63,6 +63,16 @@ const Search = () => {
         letterSearch: {findByOptions: LetterAttributes, label: `${languagePreference && languagePreference.letter}`, subPath: 'letters-search'},
     }
 
+    //Since we use it no where else, it might be reasonable to just call the service and have a list of profile results live here, because again
+    //Its only local to this page and I dont think will ever come up again. Will be a list method from users super thingy, much like the find by username.
+    //In fact almost just like that in some cases from the service.
+    //SHould be fine, want to set up this/ search funtionality on back end such that nothing defined just means nothing returned/ showed up right hummmhmm?hm?
+    const [searchDetails, setSearchDetails] = useState({searchType: SearchType.letterSearch, searchAttribute: LetterAttributes[0], searchValue : ''});
+    //Search type is really only used here to know what kind of search we are doing? neeed to go to server? hmmmmm. when redirecting to this page, important to remeber
+    //that the state (aka all of the values in this object thingy) will get wiped/ reset to thier defaults on a rerender and searchParams will be pulled in again anew according to any changes made by the set "method" ology of sorts.
+    //actually, going to use search type as an outlet, and then have two different result sets for different types. Helps break things up a bit more maybe and also then allows us to
+    //differentiate and know what kind of search we should be doing.
+
     useEffect(()=> {
         /*Ok, rant time. Two anyurismys and three minor heart attacks later, i finally got this working. Long story short, after a lot of experimentation I figured it out to be an issue
         * with stal states. We have had this issue before with useState and the way that it doesnt update things unless those parts are reset manually and you get one load per page. No joke
@@ -91,25 +101,19 @@ const Search = () => {
         setSearchDetails({...searchDetails});
         //console.log(searchDetails.searchType,"trigggering end");
     }, [languagePreference])
-
-
-
-    //Since we use it no where else, it might be reasonable to just call the service and have a list of profile results live here, because again
-    //Its only local to this page and I dont think will ever come up again. Will be a list method from users super thingy, much like the find by username.
-    //In fact almost just like that in some cases from the service.
-    //SHould be fine, want to set up this/ search funtionality on back end such that nothing defined just means nothing returned/ showed up right hummmhmm?hm?
-    const [searchDetails, setSearchDetails] = useState({searchType: SearchType.letterSearch, searchAttribute: LetterAttributes[0], searchValue : ''});
-    //Search type is really only used here to know what kind of search we are doing? neeed to go to server? hmmmmm. when redirecting to this page, important to remeber
-    //that the state (aka all of the values in this object thingy) will get wiped/ reset to thier defaults on a rerender and searchParams will be pulled in again anew according to any changes made by the set "method" ology of sorts.
-    //actually, going to use search type as an outlet, and then have two different result sets for different types. Helps break things up a bit more maybe and also then allows us to
-    //differentiate and know what kind of search we should be doing.
+    //languagePreference, SearchType.letterSearch, SearchType.userSearch, searchDetails
+    //Ok dependency array thing again. Not sure what the functional update suggestion is but not really sure it applies anyway maybe idk man.
+    //ALl i do is setsearhdetails calls so i dont really thing its/ the comment/ suggestion really makes sense then ehhh maybe ehhhhhh?
 
     //So apperntly, this has an accessor that gets updated on render, and a set method which act like use state
     //the setSearchParams works like navigate, but just effects the "search portion of the url"
     //I don,t think the search portion has to be specified the way id attributes do.
     //Hmm, how should this flow work? I'm not sure.
     //Expects a key value pair.
-    const [searchParams, setSearchParams] = useSearchParams();
+
+    //I think this will still work and defualt to getting only without defiinng the setter in the array pair ehhh maybe???
+    //hmmm, idk man. hmmmmmmmmmm.
+    const searchParams = useSearchParams();
 
 
     //Maybe we try that, multiple values as opposed to multiple useStates. DOnt think either is necessarily
@@ -132,7 +136,7 @@ const Search = () => {
     const sendSearch = () => {
         //THe outlet will then determine whoes search class gets called. Theoreticalyl forced typeable wrong paths should just return no search value theoreticalyl if we play
         //our cards right with ye-olde node serarch implementation.
-        console.log(searchParams);
+        //console.log(searchParams, "searchParams");
         //let test;
         //const searchParamKVP
         //console.log(searchParamKVP);

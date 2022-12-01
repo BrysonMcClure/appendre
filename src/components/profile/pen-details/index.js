@@ -1,20 +1,20 @@
 import React from "react";
-import {useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import CollaboratorList from "./collaborator-list";
-import MyLetterList from "./my-letter-list";
-import {PAGE_SIZE} from "../../write-letter";
+//import {useSelector} from "react-redux";
+//import {useNavigate} from "react-router-dom";
+// import CollaboratorList from "./collaborator-list";
+// import MyLetterList from "./my-letter-list";
+// import {PAGE_SIZE} from "../../write-letter";
 import LettersList from "../../write-letter/letters-list";
-import Pagination from "../../pagination";
+//import Pagination from "../../pagination";
 
 const PenDetails = ({profile}) =>  {
 
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
-    const languagePreference = useSelector((state) => state.lang);
+    //const languagePreference = useSelector((state) => state.lang);
 
-    const LETTERSTARTINDEX = 0;
-    const LETTERENDINDEX = 10;
+    // const LETTERSTARTINDEX = 0;
+    // const LETTERENDINDEX = 10;
 
     //Just a note, ran into some weird behavior here, having also just in gernal run into problems with this before.
     //It was mad that I wasnt using an useEffect hook to call navigate. Also when this was a function as opposed to a react component/functional element I think,

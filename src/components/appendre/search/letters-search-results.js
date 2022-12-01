@@ -10,7 +10,7 @@ import {PAGE_SIZE} from "../../write-letter";
 const LettersSearchResults = () => {
 
     //Nice, outlet has access to the seach params as well, I guess that makes pretty good sense so good.
-    const [searchParams, setSearchParams] = useSearchParams();
+    const searchParams = useSearchParams();
 
     const letters = useSelector((state) => state.letters);
 
@@ -20,14 +20,20 @@ const LettersSearchResults = () => {
 
     const dispatch = useDispatch();
 
+    //Set the reducers letters state to now have/ be the/ be / have focus/ focused on our subb set of
+    //letters which is our search results, which we then poll and display ehh? rather than using a state var I think that\//makes sense right,
+    //also this way we use a hook and a state var which will update verything then derived from that source of truth as opposed to having
+    //maybbe things not rerender right? I think/ would asuume/ hope/ think tihis is the way things work around here right?????
     useEffect(() => {
         async function searchForLetters () {
-            await findLettersByAttribute(dispatch, [...searchParams]);
+            await findLettersByAttribute(dispatch, [...searchParams[0]]);
             console.log("triggered");
         }
         //Protect against mutated url erroring out do to no search params. Nip in bud here or handle on server side? IDK
         searchParams && searchForLetters();
-    }, [searchParams])
+        console.log(...searchParams[0], "searche paramamsmsms")
+    }, [dispatch])
+    //Again dispath dependencies thingy i hope it shouldnt muck anything up ehhh?
 
     const [attribute, value] = [...searchParams][0];
 

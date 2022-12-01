@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
 import * as authAction from "../../actions/auth-action";
 import PenDetails from "./pen-details";
 import FileBase64 from 'react-file-base64';
@@ -9,27 +8,29 @@ import FileBase64 from 'react-file-base64';
 const PrivateUserDetails = ({profile}) => {
 
     const languagePreference = useSelector((state) => state.lang);
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const logoutUser = async () => {
-        //Changing this to use the action instead, now that profile is a reducer and not a local state var,
-        //Just to make it explicit that we are clearing the session, instead of just redirecting and counting
-        //On next login to repole session. Essentially action is just helping us to maintain parody explicitly
-        //Of reducer and server status rather than counting on next load to overrite with new session data me thinks.
-        const response = await authAction.logout(dispatch);
-        //Nice, fixed void return type and this works now. Check mark.
-        if (response === "OK") {
-            navigate('/');
-        }
-        else {
-            alert("Logout Failed, Please Try again");
-        }
-        console.log(response);
-    }
+    //Got rid of that button here just because it started to feel a little clutered right ehhhhhhbh?
+    //might put back in later. Not sure yet hmmmmmmmmm..
+    // const logoutUser = async () => {
+    //     //Changing this to use the action instead, now that profile is a reducer and not a local state var,
+    //     //Just to make it explicit that we are clearing the session, instead of just redirecting and counting
+    //     //On next login to repole session. Essentially action is just helping us to maintain parody explicitly
+    //     //Of reducer and server status rather than counting on next load to overrite with new session data me thinks.
+    //     const response = await authAction.logout(dispatch);
+    //     //Nice, fixed void return type and this works now. Check mark.
+    //     if (response === "OK") {
+    //         navigate('/');
+    //     }
+    //     else {
+    //         alert("Logout Failed, Please Try again");
+    //     }
+    //     console.log(response);
+    // }
 
     const updateProfilePic = async (newPhoto) => {
-        const response = await authAction.updateUser(dispatch, {...profile, profilePic: newPhoto});
+        await authAction.updateUser(dispatch, {...profile, profilePic: newPhoto});
     }
 
     const [newPassword, setNewPassword] = useState({password: "", confirmedPassword: "", visible: false});

@@ -2,16 +2,16 @@ import React from "react";
 import {useSelector} from "react-redux";
 //import englishStrings from '../recources/strings-english';
 //import frenchStrings from '../recources/french-strings';
-import {Outlet, useNavigate} from "react-router-dom";
-import NavigationSidebar from "./appendre/navigation-sidebar";
-import {Provider} from "react-redux";
-import languagePreferenceReducer from "../reducers/language-preference-reducer";
+import {useNavigate} from "react-router-dom";
+// import NavigationSidebar from "./appendre/navigation-sidebar";
+// import {Provider} from "react-redux";
+//import languagePreferenceReducer from "../reducers/language-preference-reducer";
 //Had to remeber to install these pacakages via npm install. Not quite sure if --save was necessary here but did it in anycase. Dont think it can jurt anything
 //But in case it does now we have a note of what we did
-import {combineReducers, createStore} from "redux";
+//import {createStore} from "redux";
 //const reducer =
-const store = createStore(languagePreferenceReducer);
-
+//const store = createStore(languagePreferenceReducer);
+//This is all from at one point when landing page was the top level and was responsible for the provideer and reducer and stufff ehh?
 const LandingPage = () => {
 
     const languagePreference = useSelector((state) => state.lang);

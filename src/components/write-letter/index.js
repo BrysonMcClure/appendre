@@ -4,16 +4,11 @@ import * as lettersAction from "../../actions/letters-action";
 //not using find all anymore anyway right?
 //import {findAllLetters, createLetter} from "../../actions/letters-action";
 //import {getLanguage} from "../../actions/language-action";
-import LettersList from "./letters-list";
-import {calculateNewValue} from "@testing-library/user-event/dist/utils";
 import TagList from "./tag-list";
 import {useNavigate, useParams} from "react-router-dom";
-import Pagination from "../pagination";
 import * as authAction from "../../actions/auth-action"
 
-const CHAR_CAP = 300;
 export const PAGE_SIZE = 7;
-const PAGINATIONSTUB = "/appendre/write-letter";
 export const LETTER_DETAILS_STUB = "/appendre/letterDetails";
 
 //Adding stuff so this same interface can be resused and this same page redirected to to edit a letter
@@ -125,7 +120,7 @@ const WriteLetter = () => {
             setNewLetter(existingLetter);
             setNewTags({...newTags, addedTags: existingLetter.tags});
         }
-    }, []);
+    }, [dispatch, letters, newTags, params.letterId]);
 
     //htmlfor and for === same thing???????? hmmmm me no know.
 
@@ -147,7 +142,7 @@ const WriteLetter = () => {
         //so ...newTags is the curreent state of the object, including local mods regardless of if they
         //were dont via the change I tink. So ... is same as addedTags: gets, new value
         //so local edited copy is best of both worlds?
-        setNewTags({... newTags, draftedTag: ''});
+        setNewTags({...newTags, draftedTag: ''});
         //doesnt update right away
         console.log(newTags.draftedTag, "draft");
         console.log("2",newTags.addedTags);

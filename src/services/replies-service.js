@@ -3,7 +3,7 @@ import axios from "axios";
 //Maybe want to set up an enviornmetn variables file like this or something to centeralize them all, and then just import them,
 //thus making it all easier if/ when we change the service? Idk, maybe, kinda sounds like a good idea maybe but for now for stuff, just a nice to have going
 //forward for the future and stuff and what not.
-import {API_BASE} from "./letters-service";
+import {API_BASE} from "./api-base";
 const REPLIES_API = `${API_BASE}/replies`;
 
 const api = axios.create({

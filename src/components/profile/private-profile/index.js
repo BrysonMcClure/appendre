@@ -6,14 +6,14 @@ import PublicUserDetails from "../public-user-details";
 
 const PrivateProfile = () => {
 
-    const languagePreference = useSelector((state) => state.lang);
+    //const languagePreference = useSelector((state) => state.lang);
     const profile = useSelector((state) => state.profile);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         authAction.getProfile(dispatch);
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>

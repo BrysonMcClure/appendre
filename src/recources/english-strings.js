@@ -52,7 +52,11 @@ const englishStrings = {
     changePassword: 'Change Password',
     profilePic: 'Profile Pic',
     updateProfilePic: 'Update Profile Pic',
-    viewLettersByThisPen: 'View Letters By This Pen'
+    viewLettersByThisPen: 'View Letters By This Pen',
+    requestPending: 'Request Pending',
+    activeCollaborator: 'Active Collaborator',
+    pendingYourApproval: 'Pending Your Approval',
+    accept: 'Accept'
 };
 
 export default englishStrings;

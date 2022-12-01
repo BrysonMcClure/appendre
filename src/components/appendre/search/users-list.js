@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import UserListItem from "./user-list-item";
 
 const UsersList = ({usersList = []}) => {
-    const languagePreference = useSelector((state) => state.lang);
+    //const languagePreference = useSelector((state) => state.lang);
     return(
         <div>
             {console.log(usersList)}

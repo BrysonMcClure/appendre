@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useSearchParams, useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {useEffect} from "react";
 import * as authService from "../../../services/auth-service"
 import UsersList from "./users-list";
@@ -9,13 +9,13 @@ import {PAGE_SIZE} from "../../write-letter";
 
 const UsersSearchResults = () => {
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const searchParams = useSearchParams();
 
     const [usersList, setUsersList] = useState([]);
 
     const params = useParams();
 
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     const languagePreference = useSelector((state) => state.lang);
 
@@ -23,7 +23,12 @@ const UsersSearchResults = () => {
         async function searchForLetters () {
             //would be willing to abstract this out like we did with letters, once we move to an action for this over a service, as a service I think it should really only be responsible for
             //interfacing with the server via an http request as a translation layer for us and nothing else.
-            const [attribute, value] = [...searchParams][0];
+            const [attribute, value] = [...searchParams[0]][0];
+            console.log(searchParams[0], "nooo, loooook attttt meeeeee");
+            const testArray = ['a', 'b'];
+            const [one, two] = testArray;
+            console.log(one, "loookkkk atttt meeeeee");
+            console.log(attribute, "atributeeee");
             const result = await authService.findUsersByAttribute(attribute, value);
             setUsersList(result);
             console.log("triggered");

@@ -1,4 +1,5 @@
 import React from "react";
+import {useSelector} from "react-redux";
 
 //its not just conditionally showing components, but also a way of doing guarding against undefined/ not yet loaded in
 //elements and stuff.
@@ -7,6 +8,9 @@ import React from "react";
 //population or anything once we have the data, theoretically it should just come in all set up hopefully/ theoretically right???????????
 
 const FollowedListItem = ({pen}) => {
+
+    const languagePreference = useSelector((state) => state.lang);
+
     return(
         <div>
             <div className="list-group">
@@ -15,7 +19,7 @@ const FollowedListItem = ({pen}) => {
                     <div className="d-flex w-100 justify-content-between hstack">
                         <h5 className="mb-1">{pen.username && pen.username}</h5>
                         {/*<small>3 days ago</small>*/}
-                        {pen.profilePic && <img className="rounded-circle" width="25%" src={pen.profilePic}/>}
+                        {pen.profilePic && <img className="rounded-circle" width="25%" src={pen.profilePic} alt={languagePreference.profilePic}/>}
                     </div>
                     {/*<p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas*/}
                     {/*    sed diam eget risus varius blandit.</p>*/}

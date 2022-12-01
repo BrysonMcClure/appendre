@@ -4,7 +4,7 @@ import {setLanguage, getLanguage} from "../../../actions/language-action";
 import {getProfile} from "../../../actions/auth-action";
 import englishStrings from "../../../recources/english-strings";
 import frenchStrings from "../../../recources/french-strings";
-import {useNavigate} from "react-router-dom";
+//import {useNavigate} from "react-router-dom";
 
 const NavigationBanner = () => {
 

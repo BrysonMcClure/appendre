@@ -1,6 +1,6 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
-import * as authAction from "../../../actions/auth-action";
+import {useSelector} from "react-redux";
+//import * as authAction from "../../../actions/auth-action";
 import Connection from "../Connection";
 
 const UserListItem = ({user}) => {
@@ -10,7 +10,7 @@ const UserListItem = ({user}) => {
     //should we call or get passed this? hmmmmmm, i think we can do this here maybe.
     const profile = useSelector((state) => state.profile);
 
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     //Kinda duct-tapey. would prefer not to have to pull back the curtain. but this is a problem
     //with populations and full author objects. Wiat, what if we just added user? hmm. i feel like actually that
@@ -27,11 +27,13 @@ const UserListItem = ({user}) => {
         return 1;
     });}
 
-    let collaboratorsIDs = [];
+    //let collaboratorsIDs = [];
     let collabStatus;
+    //Should maybe be made into a for in instead of using map in this way maybe?
+    //like idk man but maybe map in this way might cause unexpected problem or something ehh?
     if(profile.users === 'PenUser') {
-        collaboratorsIDs = profile.collaborators.map((collaborator) => {
-            if(collaborator.pen._id == user._id) {
+        profile.collaborators.map((collaborator) => {
+            if(collaborator.pen._id === user._id) {
                 console.log(collaborator, "fired");
                 collabStatus = collaborator;
             }
@@ -40,23 +42,23 @@ const UserListItem = ({user}) => {
     }
 
 
-    const followed = followedPensIDs.includes(user._id);
-    // const collaboratorsIDsOnly = collaboratorsIDs.map((collab) => {
-    //     return collab.pen;
-    // })
-    //const collabInitiated = collaboratorsIDs.includes({pen: user._id, status: {}});
-
-    const followPen = () => {
-        //should be safe as we protect against this button firing when profile is not a pal
-        //only can follow someone when logged in right? makes sense right?
-        //Checking first if user is already following this pen
-        //actually button just shouldnt render then right?
-        //if(!profile.followedPens.includes(user._id)) {
-            authAction.updateUser(dispatch, {...profile, followedPens: followedPensIDs.concat([user._id])});
-        //}
-        //otherwise do nothing right?
-        //d-grid vs d-flex???? what s d???
-    }
+    // const followed = followedPensIDs.includes(user._id);
+    // // const collaboratorsIDsOnly = collaboratorsIDs.map((collab) => {
+    // //     return collab.pen;
+    // // })
+    // //const collabInitiated = collaboratorsIDs.includes({pen: user._id, status: {}});
+    //
+    // const followPen = () => {
+    //     //should be safe as we protect against this button firing when profile is not a pal
+    //     //only can follow someone when logged in right? makes sense right?
+    //     //Checking first if user is already following this pen
+    //     //actually button just shouldnt render then right?
+    //     //if(!profile.followedPens.includes(user._id)) {
+    //         authAction.updateUser(dispatch, {...profile, followedPens: followedPensIDs.concat([user._id])});
+    //     //}
+    //     //otherwise do nothing right?
+    //     //d-grid vs d-flex???? what s d???
+    // }
 
     // const requestCollaboration = () => {
     //     // const newCollab = {
@@ -72,7 +74,7 @@ const UserListItem = ({user}) => {
     //     authAction.requestsCollaboration(dispatch, profile._id, user._id);
     // }
 
-    const collaborationPossible = (user.users === 'PenUser' && profile.users === 'PenUser' && !collabStatus && user._id !== profile._id);
+    //const collaborationPossible = (user.users === 'PenUser' && profile.users === 'PenUser' && !collabStatus && user._id !== profile._id);
 
     return(
         <div className="card">
@@ -87,7 +89,7 @@ const UserListItem = ({user}) => {
                     </div>
                     <div className="col">
                         <div className="float-end vstack">
-                            {user.profilePic && <img className="rounded-circle card-image float-end" width="50%" src={user.profilePic}/>}
+                            {user.profilePic && <img className="rounded-circle card-image float-end" width="50%" src={user.profilePic} alt={languagePreference.profilePic}/>}
                             {/*{followed && <p>Following <i className="fas fa-check"></i></p>}*/}
                             {/*{(collabStatus && collabStatus.status === 'PENDING') && <p>Request Pending</p>}*/}
                             {/*{(collabStatus && collabStatus.status === 'ACTIVE') && <p>Active Collaborator</p>}*/}

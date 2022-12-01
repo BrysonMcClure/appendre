@@ -1,11 +1,11 @@
-import React, {useEffect}from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 //import {getLanguage, setLanguage} from "../../../actions/language-action";
 import {PAGE_SIZE} from "../../write-letter";
 import * as authAction from "../../../actions/auth-action";
-import {useLocation, useNavigate} from "react-router-dom";
-import {getLanguage} from "../../../actions/language-action";
-import {getProfile} from "../../../actions/auth-action";
+import {useNavigate} from "react-router-dom";
+// import {getLanguage} from "../../../actions/language-action";
+// import {getProfile} from "../../../actions/auth-action";
 
 export const SEARCH_LINK = "/appendre/search";
 export const WRITE_LETTER_LINK = `/appendre/write-letter`

@@ -18,12 +18,15 @@ const Letters = () => {
 
     const dispatch = useDispatch();
 
+    //Hopefully this doesnt break everything. It wants dispatch as part of the dependency array because it is used within,
+    //And I think I know now I dont want to just remove the dependency array since then it will run a ton of times maybe uneccessarily, ehhhh hmmmm?
+    //so adding this for now, thoeretically it does not change and... should then only load once and at most retriggeer the use effect hook once ehh maybe yay?
     useEffect(() => {
         async function loadLetter (){
             await findAllLetters(dispatch);
         }
         loadLetter();
-    }, []);
+    }, [dispatch]);
 
     return(
         //No logged in checks as, this level of stuff would be public user accessible.
