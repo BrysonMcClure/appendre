@@ -48,7 +48,7 @@ const NavigationBanner = () => {
         //first place beyond just because I restarted the server which will very likely a part of it, was also likely not the whole picture/ issue
         //which again helps to explain why it was happening so often. Ahhhhh, nice!
         getProfile(dispatch);
-    }, []);
+    }, [dispatch]);
 
     //useffect is a render, not a load trigger i think, that should make a big difference for us in rug pull server scenarios.
 

@@ -18,28 +18,31 @@ const UserListItem = ({user}) => {
     // because then either way the problem remains the way
     //update works setting a prop to the provided one. We maybe need a special add one thing or something. idk.
     //For now sticking with this.
-    let followedPensIDs = [];
-    if(profile.users === 'PalUser'){
-        followedPensIDs = profile.followedPens.map((pen) => {
-        if(pen._id) {
-            return pen._id
-        }
-        return 1;
-    });}
+    //let followedPensIDs = [];
+    //Again using map in this casee, but given we arent actually using the reuslt of the array or anything, maybe some sort of other loop we would be bbetter here maybe?
+    //arent thesee burried somewhere else now? i do think so i guess and so ok this should be fine now then yeah?
+    // if(profile.users === 'PalUser'){
+    //     profile.followedPens.map((pen) => {
+    //     if(pen._id) {
+    //         return pen._id
+    //     }
+    //     return 1;
+    // });}
 
     //let collaboratorsIDs = [];
-    let collabStatus;
-    //Should maybe be made into a for in instead of using map in this way maybe?
-    //like idk man but maybe map in this way might cause unexpected problem or something ehh?
-    if(profile.users === 'PenUser') {
-        profile.collaborators.map((collaborator) => {
-            if(collaborator.pen._id === user._id) {
-                console.log(collaborator, "fired");
-                collabStatus = collaborator;
-            }
-            return collaborator.pen._id
-        })
-    }
+    //collab status now gets used in a sub component right yeah?
+    // let collabStatus;
+    // //Should maybe be made into a for in instead of using map in this way maybe?
+    // //like idk man but maybe map in this way might cause unexpected problem or something ehh?
+    // if(profile.users === 'PenUser') {
+    //     profile.collaborators.map((collaborator) => {
+    //         if(collaborator.pen._id === user._id) {
+    //             console.log(collaborator, "fired");
+    //             collabStatus = collaborator;
+    //         }
+    //         return collaborator.pen._id
+    //     })
+    // }
 
 
     // const followed = followedPensIDs.includes(user._id);

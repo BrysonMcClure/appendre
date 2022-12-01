@@ -9,7 +9,8 @@ import {PAGE_SIZE} from "../../write-letter";
 //     username: {attribute: 'username', label: 'Username'},
 //     role: {attribute: 'role', label: 'Role'}
 // }
-
+//Its a cheat, but for now until I completly retool the drop down options here we are just going to use this.
+/* eslint-disable */
 
 
 

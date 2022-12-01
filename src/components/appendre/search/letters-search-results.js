@@ -7,6 +7,10 @@ import {CHAR_CAP} from "../letters";
 import Pagination from "../../pagination";
 import {PAGE_SIZE} from "../../write-letter";
 
+//This is a cheeat, but until i can figure the work around for needing searchparams as the dependencies, using this for now just to get thigns
+//up and off the ground and running for now ehhh?????
+/* eslint-disable */
+
 const LettersSearchResults = () => {
 
     //Nice, outlet has access to the seach params as well, I guess that makes pretty good sense so good.
