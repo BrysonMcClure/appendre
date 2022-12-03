@@ -1,11 +1,12 @@
 import * as authService from "../services/auth-service";
 import {CREATE_LETTER, DELETE_LETTER, UPDATE_LETTER} from "./letters-action";
+import {API_BASE} from "../services/api-base";
 
 export const GET_PROFILE = 'GET_PROFILE';
 export const LOGOUT = 'LOGOUT';
 
 export const getProfile = async (dispatch) => {
-    console.log("dispatchcalled");
+    console.log(API_BASE, "dispatchcalled");
     const userProfile = await authService.profile();
     console.log(userProfile, "userprofile from get")
     dispatch({

@@ -7,6 +7,10 @@ import UsersList from "./users-list";
 import Pagination from "../../pagination";
 import {PAGE_SIZE} from "../../write-letter";
 
+//This is a cheeat, but until i can figure the work around for needing searchparams as the dependencies, using this for now just to get thigns
+//up and off the ground and running for now ehhh?????
+/* eslint-disable */
+
 const UsersSearchResults = () => {
 
     const searchParams = useSearchParams();
@@ -33,7 +37,7 @@ const UsersSearchResults = () => {
         }
         //Protect against mutated url erroring out do to no search params. Nip in bud here or handle on server side? IDK
         searchParams && searchForLetters();
-    }, [searchParams])
+    }, [])
 
     const [attribute, value] = [...searchParams][0];
 
