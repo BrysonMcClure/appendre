@@ -24,6 +24,8 @@ const LettersSearchResults = () => {
 
     const dispatch = useDispatch();
 
+    const [attribute, value] = [...searchParams[0]][0];
+
     //Set the reducers letters state to now have/ be the/ be / have focus/ focused on our subb set of
     //letters which is our search results, which we then poll and display ehh? rather than using a state var I think that\//makes sense right,
     //also this way we use a hook and a state var which will update verything then derived from that source of truth as opposed to having
@@ -36,10 +38,8 @@ const LettersSearchResults = () => {
         //Protect against mutated url erroring out do to no search params. Nip in bud here or handle on server side? IDK
         searchParams && searchForLetters();
         console.log(...searchParams[0], "searche paramamsmsms")
-    }, [dispatch])
+    }, [dispatch, value])
     //Again dispath dependencies thingy i hope it shouldnt muck anything up ehhh?
-
-    const [attribute, value] = [...searchParams][0];
 
 
     return(

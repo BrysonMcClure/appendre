@@ -10,7 +10,7 @@ import {useNavigate} from "react-router-dom";
 export const SEARCH_LINK = "/appendre/search";
 export const WRITE_LETTER_LINK = `/appendre/write-letter`
 
-const NavigationSidebar = ({active = 'profile'}) => {
+const NavigationSidebar = ({active = ''}) => {
 
     //const dispatch = useDispatch();
 
@@ -62,9 +62,10 @@ const NavigationSidebar = ({active = 'profile'}) => {
     return(
         <div className="list-group">
             {/*console.log(languagePreference) 0 is always the start right? cant imagine a case in which we would want to make this a var or anything,
-            if you want somewhere in the middle or something that is for you the user to manage/ take care of once you get on the page via pagination right??*/}
+            if you want somewhere in the middle or something that is for you the user to manage/ take care of once you get on the page via pagination right??
+            //The '' case is a baindaid, but for now I am cool with it and it  works as desired.*/}
             {profile._id && <a href="/appendre/profile" className={`list-group-item list-group-item-action ${active === 'profile' ? "active" : ''}`}>{languagePreference.profile}</a>}
-            <a href={`/appendre/letters/0/${PAGE_SIZE}`} className={`list-group-item list-group-item-action ${active === 'letters' ? "active" : ''}`}>{languagePreference.trending_letters}</a>
+            <a href={`/appendre/letters/0/${PAGE_SIZE}`} className={`list-group-item list-group-item-action ${(active === 'letters' || active === '') ? "active" : ''}`}>{languagePreference.trending_letters}</a>
             <a href={SEARCH_LINK} className={`list-group-item list-group-item-action ${active === 'search' ? "active" : ''}`}>{languagePreference.search}</a>
             {profile.users === 'PenUser' &&
                 <a href={WRITE_LETTER_LINK} className={`list-group-item list-group-item-action ${active === 'write-letter' ? "active" : ''}`}>{languagePreference.writeALetter}</a>

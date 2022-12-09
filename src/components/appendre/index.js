@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Outlet, useLocation} from "react-router-dom";
 import NavigationSidebar from "./navigation-sidebar";
 import ConnectionsSidebar from "./connections-sidebar";
@@ -9,6 +9,7 @@ import ConnectionsSidebar from "./connections-sidebar";
 import {useSelector} from "react-redux";
 // //const reducer =
 // const store = createStore(languagePreferenceReducer);
+//import {test} from "../../services/wr-service"
 
 const Appendre = () => {
 
@@ -20,7 +21,13 @@ const Appendre = () => {
 
     //FOr now these are all top level things, so it should be fine right ehhh???????
 
-    const currentParentPage = location.pathname.split('/')[2];
+    //const currentParentPage = location.pathname.split('/')[2];
+
+    const [currentParentPage, setParentPage] = useState("");
+
+    useEffect(() => {
+        console.log("triggered");
+        setParentPage(location.pathname.split('/')[2])}, [location]);
 
     return(
         <div className="row mt-2">

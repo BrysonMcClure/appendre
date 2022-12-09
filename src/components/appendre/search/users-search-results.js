@@ -23,6 +23,8 @@ const UsersSearchResults = () => {
 
     const languagePreference = useSelector((state) => state.lang);
 
+    const [attribute, value] = [...searchParams[0]][0];
+
     useEffect(() => {
         async function searchForLetters () {
             //would be willing to abstract this out like we did with letters, once we move to an action for this over a service, as a service I think it should really only be responsible for
@@ -37,9 +39,7 @@ const UsersSearchResults = () => {
         }
         //Protect against mutated url erroring out do to no search params. Nip in bud here or handle on server side? IDK
         searchParams && searchForLetters();
-    }, [])
-
-    const [attribute, value] = [...searchParams][0];
+    }, [value])
 
     return(
         <div>
